@@ -214,56 +214,10 @@
     }
     #portal-overlay.open .portal-h { animation:portalHMergeZoom 0.9s cubic-bezier(.2,1,.3,1) forwards; }
  
-    /* ═══════════════════════════ NAV ═══ */
+    /* ═══════════════════════════ HERO ═══ */
     #main-site { opacity:0; transition:opacity .6s ease; }
     #main-site.visible { opacity:1; }
- 
-    nav {
-      position:sticky; top:0; z-index:200;
-      background:rgba(26,15,15,.92);
-      backdrop-filter:blur(20px) saturate(1.2);
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0 clamp(24px,5vw,72px); height:68px;
-      border-bottom:1px solid rgba(201,151,58,.12);
-    }
-    nav::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg,transparent,rgba(201,151,58,.5) 30%,rgba(232,192,106,.8) 50%,rgba(201,151,58,.5) 70%,transparent);
-    }
-    .nav-brand {
-      font-family:'Cormorant Garamond',serif; font-size:22px; letter-spacing:8px; font-weight:400;
-      color:var(--cream); text-decoration:none; position:relative;
-    }
-    .nav-brand::after {
-      content:attr(data-sub); display:block;
-      font-size:7px; letter-spacing:3.5px; font-weight:300; font-family:'Jost',sans-serif;
-      color:rgba(201,151,58,.6); text-transform:uppercase; line-height:1; margin-top:2px;
-    }
-    .nav-links { display:flex; gap:clamp(20px,3vw,44px); list-style:none; }
-    .nav-links a {
-      font-size:10px; font-weight:400; letter-spacing:2.5px; text-transform:uppercase;
-      color:rgba(250,246,238,.6); text-decoration:none; transition:color .25s; position:relative; padding-bottom:2px;
-    }
-    .nav-links a::after {
-      content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
-      background:var(--gold); transform:scaleX(0); transform-origin:left;
-      transition:transform .3s cubic-bezier(.4,0,.2,1);
-    }
-    .nav-links a:hover,.nav-links a.active { color:var(--cream); }
-    .nav-links a:hover::after,.nav-links a.active::after { transform:scaleX(1); }
-    .nav-right { display:flex; align-items:center; gap:20px; }
-    .nav-reserve {
-      font-size:9px; font-weight:400; letter-spacing:2.5px; text-transform:uppercase;
-      color:var(--gold); border:1px solid rgba(201,151,58,.35); padding:8px 18px;
-      text-decoration:none; transition:background .25s,color .25s,border-color .25s; display:none;
-    }
-    @media (min-width:900px) { .nav-reserve { display:block; } }
-    .nav-reserve:hover { background:var(--gold); color:var(--bg-dark); border-color:var(--gold); }
-    .nav-cart { display:flex; align-items:center; cursor:none; color:rgba(250,246,238,.7); font-size:17px; position:relative; transition:color .2s; }
-    .nav-cart:hover { color:var(--cream); }
-    .cart-badge { position:absolute; top:-4px; right:-6px; width:16px; height:16px; border-radius:50%; background:var(--gold); color:var(--bg-dark); font-size:9px; font-weight:500; display:flex; align-items:center; justify-content:center; }
- 
-    /* ═══════════════════════════ HERO ═══ */
+
     #home {
       position: relative;
       min-height: 100vh;
@@ -515,12 +469,129 @@
       max-width: 600px;
       margin: 0 auto;
     }
+
+    /* Featured Post */
+    .blog-featured {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 48px;
+      overflow: hidden;
+      min-height: 480px;
+      background: var(--cream);
+      border: 1px solid rgba(201,151,58,.15);
+    }
+    .blog-featured-image {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      min-height: 480px;
+    }
+    .blog-featured-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(107,17,38,.7) 0%, rgba(107,17,38,.4) 100%);
+    }
+    .blog-featured-tag {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      background: var(--gold);
+      color: var(--bg-dark);
+      padding: 6px 16px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      z-index: 2;
+    }
+    .blog-featured-content {
+      padding: clamp(40px,6vw,60px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .blog-featured-date {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .blog-featured-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px,4vw,48px);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .blog-featured-excerpt {
+      font-size: clamp(15px,1.5vw,18px);
+      line-height: 1.8;
+      color: var(--text-lt);
+      margin-bottom: 32px;
+    }
+    .blog-featured-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 36px;
+      background: var(--primary);
+      color: var(--cream);
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background .3s ease, gap .3s ease;
+      align-self: flex-start;
+    }
+    .blog-featured-cta:hover {
+      background: var(--gold);
+      color: var(--bg-dark);
+      gap: 16px;
+    }
+
+    /* Category Filters */
+    .blog-filters {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .blog-filter-btn {
+      padding: 10px 24px;
+      background: transparent;
+      border: 1px solid rgba(201,151,58,.25);
+      color: var(--text);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: 'Jost', sans-serif;
+      cursor: pointer;
+      transition: all .3s ease;
+    }
+    .blog-filter-btn:hover {
+      border-color: var(--gold);
+      color: var(--primary);
+    }
+    .blog-filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg-dark);
+    }
+
+    /* Blog Grid */
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 40px;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 0 auto 80px;
     }
     .blog-card {
       background: rgba(250,246,238,.6);
@@ -528,6 +599,8 @@
       padding: 36px;
       transition: transform .3s ease, box-shadow .3s ease;
       position: relative;
+      display: flex;
+      flex-direction: column;
     }
     .blog-card::before {
       content: '';
@@ -553,21 +626,35 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--gold);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .blog-category {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(107,17,38,.6);
       margin-bottom: 12px;
+      padding: 4px 12px;
+      background: rgba(201,151,58,.1);
+      border-radius: 2px;
     }
     .blog-card h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(24px,3vw,32px);
+      font-size: clamp(22px,3vw,28px);
       font-weight: 400;
       color: var(--primary);
       margin-bottom: 16px;
       line-height: 1.3;
+      flex-grow: 0;
     }
     .blog-excerpt {
       font-size: 15px;
       line-height: 1.8;
       color: var(--text-lt);
       margin-bottom: 24px;
+      flex-grow: 1;
     }
     .blog-read-more {
       display: inline-flex;
@@ -579,10 +666,121 @@
       color: var(--primary);
       text-decoration: none;
       transition: gap .3s ease, color .3s ease;
+      margin-top: auto;
     }
     .blog-read-more:hover {
       gap: 12px;
       color: var(--gold);
+    }
+    .blog-card-link-arrow {
+      font-size: 16px;
+      transition: transform .3s ease;
+    }
+    .blog-read-more:hover .blog-card-link-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Newsletter Signup */
+    .blog-newsletter {
+      background: var(--primary);
+      padding: clamp(48px,8vh,80px) clamp(40px,6vw,80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .blog-newsletter::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 60% 70% at 50% 50%, transparent 40%, rgba(26,5,5,.3) 100%);
+      pointer-events: none;
+    }
+    .blog-newsletter-content {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-width: 280px;
+    }
+    .blog-newsletter-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px,4vw,42px);
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .blog-newsletter-subtitle {
+      font-size: 15px;
+      color: rgba(250,246,238,.6);
+      line-height: 1.6;
+    }
+    .blog-newsletter-form {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 12px;
+      flex: 1;
+      min-width: 320px;
+    }
+    .blog-newsletter-input {
+      flex: 1;
+      padding: 16px 24px;
+      background: rgba(250,246,238,.95);
+      border: 1px solid rgba(201,151,58,.3);
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      transition: border-color .3s ease;
+    }
+    .blog-newsletter-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .blog-newsletter-input::placeholder {
+      color: rgba(42,26,26,.4);
+    }
+    .blog-newsletter-btn {
+      padding: 16px 36px;
+      background: var(--gold);
+      border: none;
+      color: var(--bg-dark);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .3s ease, transform .3s ease;
+      white-space: nowrap;
+    }
+    .blog-newsletter-btn:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .blog-featured {
+        grid-template-columns: 1fr;
+      }
+      .blog-featured-image {
+        min-height: 300px;
+      }
+      .blog-newsletter {
+        flex-direction: column;
+        text-align: center;
+      }
+      .blog-newsletter-form {
+        flex-direction: column;
+        width: 100%;
+      }
+      .blog-newsletter-btn {
+        width: 100%;
+      }
     }
 
     /* ═══════════════════════════ CONTACT SECTION ═══ */
@@ -2057,21 +2255,6 @@
 <!-- ──────────── MAIN SITE ──────────── -->
 <div id="main-site">
  
-  <nav role="navigation" aria-label="Main navigation">
-    <a href="#home" class="nav-brand" data-sub="Luxury Dessert Catering">ALHA</a>
-    <ul class="nav-links">
-      <li><a href="#" class="active" data-target="home">Home</a></li>
-      <li><a href="menu.html" data-target="menu">Menu</a></li>
-      <li><a href="#" data-target="events">Events</a></li>
-      <li><a href="#" data-target="about">About</a></li>
-      <li><a href="#" data-target="contact">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <a href="#contact" class="nav-reserve">Reserve a Table</a>
-      <div class="nav-cart" role="button" aria-label="Cart" tabindex="0">🛒<span class="cart-badge" id="cart-badge" style="display:none;">0</span></div>
-    </div>
-  </nav>
- 
   <!-- ══════════════════════════ SECTION: HOME ══════════════════════════ -->
   <section id="home" aria-label="Welcome">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
@@ -2201,6 +2384,148 @@
       <canvas id="quote-canvas" aria-hidden="true"></canvas>
       <p class="quote-text reveal-quote">"We don't just make desserts — we craft the sweetest chapters of your story."</p>
       <p class="quote-attr reveal-quote" style="transition-delay:.2s;">— The ALHA Philosophy</p>
+    </section>
+
+    <!-- ══════════════════════════ SECTION: BLOG ══════════════════════════ -->
+    <section id="blog" class="full-section" aria-label="Journal">
+      <div class="blog-header">
+        <h2>Journal</h2>
+        <p>Stories, celebrations, and the craft behind every creation</p>
+      </div>
+
+      <!-- Featured Post -->
+      <article class="blog-featured">
+        <div class="blog-featured-image" style="background-image: url('events1.jpeg');">
+          <div class="blog-featured-overlay"></div>
+          <span class="blog-featured-tag">Featured</span>
+        </div>
+        <div class="blog-featured-content">
+          <span class="blog-featured-date">June 12, 2026</span>
+          <h3 class="blog-featured-title">A Grand Wedding at the Ritz: How We Crafted 800 Desserts in One Elegant Evening</h3>
+          <p class="blog-featured-excerpt">When the Al-Rashidi family commissioned ALHA for their daughter's celebration, we knew this would be a defining moment. Six tiers of saffron-infused choux, 1200 gold-dusted macarons, and a dessert table that stretched twelve metres became the talk of Dubai's social calendar.</p>
+          <a href="#" class="blog-featured-cta">Read the Full Story <span class="blog-card-link-arrow">→</span></a>
+        </div>
+      </article>
+
+      <!-- Category Filters -->
+      <div class="blog-filters">
+        <button class="blog-filter-btn active" data-filter="all">All</button>
+        <button class="blog-filter-btn" data-filter="events">Events</button>
+        <button class="blog-filter-btn" data-filter="recipes">Recipes</button>
+        <button class="blog-filter-btn" data-filter="stories">Stories</button>
+        <button class="blog-filter-btn" data-filter="behind-the-scenes">Behind the Scenes</button>
+      </div>
+
+      <!-- Blog Grid -->
+      <div class="blog-grid">
+        <article class="blog-card" data-category="recipes">
+          <span class="blog-date">June 5, 2026</span>
+          <span class="blog-category">Recipes</span>
+          <h3>The Art of the Croquembouche</h3>
+          <p class="blog-excerpt">Building a towering croquembouche is equal parts architecture and artistry. Each choux puff must be perfectly golden, each thread of caramel precisely spun to create that signature lattice structure that makes guests gasp.</p>
+          <a href="#" class="blog-read-more">Read More <span class="blog-card-link-arrow">→</span></a>
+        </article>
+
+        <article class="blog-card" data-category="stories">
+          <span class="blog-date">May 28, 2026</span>
+          <span class="blog-category">Stories</span>
+          <h3>Sourcing Saffron from Kashmir</h3>
+          <p class="blog-excerpt">We travel to the valleys of Kashmir each autumn to source the world's finest saffron for our signature desserts. The journey from flower to flavor is a story of patience, tradition, and uncompromising quality.</p>
+          <a href="#" class="blog-read-more">Read More <span class="blog-card-link-arrow">→</span></a>
+        </article>
+
+        <article class="blog-card" data-category="events">
+          <span class="blog-date">May 15, 2026</span>
+          <span class="blog-category">Events</span>
+          <h3>An Intimate Garden Wedding in Jumeirah</h3>
+          <p class="blog-excerpt">Forty guests, a canopy of fairy lights, and a dessert table that looked like a Monet painting. Here's how we brought romance and elegance to this intimate celebration with pastel mille-feuille and lavender-infused éclairs.</p>
+          <a href="#" class="blog-read-more">Read More <span class="blog-card-link-arrow">→</span></a>
+        </article>
+
+        <article class="blog-card" data-category="recipes">
+          <span class="blog-date">April 30, 2026</span>
+          <span class="blog-category">Recipes</span>
+          <h3>Mastering the Perfect Gulab Jamun</h3>
+          <p class="blog-excerpt">The secret to gulab jamun that melts on your tongue lies in the khoya-to-flour ratio and the temperature of your syrup. We share the technique our head chef learned from her grandmother in Kerala, refined over three decades.</p>
+          <a href="#" class="blog-read-more">Read More <span class="blog-card-link-arrow">→</span></a>
+        </article>
+
+        <article class="blog-card" data-category="behind-the-scenes">
+          <span class="blog-date">April 18, 2026</span>
+          <span class="blog-category">Behind the Scenes</span>
+          <h3>5 AM in the Kitchen: A Day with Our Pastry Team</h3>
+          <p class="blog-excerpt">Before the city wakes, our kitchen is already alive with the scent of caramelizing sugar and fresh vanilla. Follow our head pastry chef through the rituals, precision, and quiet magic that make ALHA what it is.</p>
+          <a href="#" class="blog-read-more">Read More <span class="blog-card-link-arrow">→</span></a>
+        </article>
+
+        <article class="blog-card" data-category="stories">
+          <span class="blog-date">April 5, 2026</span>
+          <span class="blog-category">Stories</span>
+          <h3>Finding Wild Honey in the Nilgiris</h3>
+          <p class="blog-excerpt">Deep in the Nilgiri hills, we source raw wild honey from tribal beekeepers who've harvested from ancient hives for generations. This golden nectar brings a floral complexity to our desserts that no commercial honey can match.</p>
+          <a href="#" class="blog-read-more">Read More <span class="blog-card-link-arrow">→</span></a>
+        </article>
+      </div>
+
+      <!-- Newsletter Signup -->
+      <div class="blog-newsletter">
+        <div class="blog-newsletter-content">
+          <h3 class="blog-newsletter-title">Stories Delivered to Your Inbox</h3>
+          <p class="blog-newsletter-subtitle">Get our latest recipes, behind-the-scenes tales, and event highlights monthly</p>
+        </div>
+        <form class="blog-newsletter-form">
+          <input type="email" class="blog-newsletter-input" placeholder="your@email.com" />
+          <button type="submit" class="blog-newsletter-btn">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════ SECTION: CONTACT ══════════════════════════ -->
+    <section id="contact" class="full-section">
+      <div class="contact-container">
+        <div class="contact-form-wrap">
+          <h2>Let's Create Together</h2>
+          <p>Ready to craft your perfect dessert experience? Reach out and let's begin.</p>
+          <form class="contact-form">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" placeholder="Fatima Al-Rashidi" />
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="hello@example.com" />
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="+971 50 000 0000" />
+            </div>
+            <div class="form-group">
+              <label>Tell us about your event</label>
+              <textarea placeholder="Type of event, date, guest count, vision..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+        <div class="contact-info">
+          <h3>Find Us</h3>
+          <div class="info-item">
+            <div class="info-label">Location</div>
+            <div class="info-value">Dubai, United Arab Emirates<br />Kollam, Kerala, India</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Email</div>
+            <div class="info-value"><a href="mailto:hello@alha.in">hello@alha.in</a></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Phone</div>
+            <div class="info-value"><a href="tel:+971561561727">+971 56 156 1727</a></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Hours</div>
+            <div class="info-value">Sunday – Thursday: 9am – 6pm<br />Friday: 10am – 2pm</div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
   </div><!-- /#view-home -->
@@ -3121,22 +3446,22 @@ setTimeout(()=>{
               fill="none" stroke="#c9973a" stroke-width="2.5" opacity="0.5"/>
       </svg>
 
-      <!-- Nav items: positioned by JS along the arc -->
-      <a class="arc-item" data-id="home" href="#home">
-        <i class="ti ti-home"></i>
-        <span>Home</span>
-      </a>
-      <a class="arc-item" data-id="menu" href="menu.html">
-        <i class="ti ti-chef-hat"></i>
-        <span>Menu</span>
+      <!-- Nav items: positioned by JS along the arc - REVERSED ORDER (Contact at top, Home at bottom) -->
+      <a class="arc-item" data-id="contact" href="#contact">
+        <i class="ti ti-mail"></i>
+        <span>Contact</span>
       </a>
       <a class="arc-item" data-id="blog" href="#blog">
         <i class="ti ti-notebook"></i>
         <span>Blog</span>
       </a>
-      <a class="arc-item" data-id="contact" href="#contact">
-        <i class="ti ti-mail"></i>
-        <span>Contact</span>
+      <a class="arc-item" data-id="menu" href="menu.html">
+        <i class="ti ti-chef-hat"></i>
+        <span>Menu</span>
+      </a>
+      <a class="arc-item" data-id="home" href="#home">
+        <i class="ti ti-home"></i>
+        <span>Home</span>
       </a>
 
       <!-- Action buttons -->
@@ -3175,6 +3500,7 @@ setTimeout(()=>{
   }
 
   // Position the 4 nav items evenly: t = 0.15, 0.38, 0.62, 0.85
+  // REVERSED ORDER: Contact (top), Blog, Menu, Home (bottom)
   const tNav = [0.15, 0.38, 0.62, 0.85];
   const items = dock.querySelectorAll('.arc-item');
   items.forEach((el, i) => {
@@ -3228,7 +3554,10 @@ setTimeout(()=>{
         items.forEach(n => n.classList.toggle('active', n.dataset.id === e.target.id));
       }
     });
-  }, { threshold: 0.35 });
+  }, { 
+    threshold: 0.15,
+    rootMargin: '-10% 0px -80% 0px'
+  });
   sectionIds.forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
 
   // Click: smooth scroll for same-page sections, navigate for menu.html
@@ -3241,13 +3570,14 @@ setTimeout(()=>{
     });
   });
 
-  // Cart badge sync
+  // Cart badge sync - read directly from localStorage
   function syncBadge() {
-    const main = document.getElementById('cart-badge');
-    const arc  = document.getElementById('arc-cart-badge');
-    if (!main || !arc) return;
-    arc.textContent = main.textContent;
-    arc.style.display = +main.textContent > 0 ? 'flex' : 'none';
+    const arc = document.getElementById('arc-cart-badge');
+    if (!arc) return;
+    const cart = JSON.parse(localStorage.getItem('alha_cart') || '[]');
+    const count = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+    arc.textContent = count;
+    arc.style.display = count > 0 ? 'flex' : 'none';
   }
 
   // Cart click → go to menu.html
@@ -3309,7 +3639,10 @@ setTimeout(()=>{
         });
       }
     });
-  }, { threshold: 0.35 });
+  }, { 
+    threshold: 0.15,
+    rootMargin: '-10% 0px -80% 0px'
+  });
   sectionIds.forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
 
   // Click handlers
@@ -3320,13 +3653,14 @@ setTimeout(()=>{
     });
   });
 
-  // Cart badge sync
+  // Cart badge sync - read directly from localStorage
   function syncBadge() {
-    const main = document.getElementById('cart-badge');
-    const mob  = document.getElementById('mob-cart-badge');
-    if (!main || !mob) return;
-    mob.textContent = main.textContent;
-    mob.style.display = +main.textContent > 0 ? 'flex' : 'none';
+    const mob = document.getElementById('mob-cart-badge');
+    if (!mob) return;
+    const cart = JSON.parse(localStorage.getItem('alha_cart') || '[]');
+    const count = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+    mob.textContent = count;
+    mob.style.display = count > 0 ? 'flex' : 'none';
   }
 
   // Cart click → go to menu.html
@@ -3337,6 +3671,33 @@ setTimeout(()=>{
   });
 
   setInterval(syncBadge, 400);
+})();
+
+/* ════════════════════════════════════════════════════════
+   BLOG CATEGORY FILTERS
+════════════════════════════════════════════════════════ */
+(function() {
+  const filterBtns = document.querySelectorAll('.blog-filter-btn');
+  const blogCards = document.querySelectorAll('.blog-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // Filter cards
+      blogCards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
 })();
 
 </script>
