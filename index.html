@@ -298,14 +298,16 @@
     #about-banner {
       position: relative;
       overflow: hidden;
-      background: var(--bg);
+      background: var(--primary);
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
     }
     
-    /* Container spans left 65-70% to avoid arc dock */
+    /* Full-width edge-to-edge container */
     .banner-carousel {
       position: relative;
-      width: 70%;
-      height: clamp(480px, 60vh, 700px);
+      width: 100%;
+      height: clamp(520px, 65vh, 750px);
       margin: 0;
       overflow: hidden;
     }
@@ -328,61 +330,72 @@
       flex-shrink: 0;
     }
     
-    /* Background layer: muted/darkened image */
+    /* Background layer: full-width burgundy with lace texture */
     .banner-background {
       position: absolute;
       inset: 0;
+      background: var(--primary);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       z-index: 0;
     }
     
-    /* Dark overlay on background for text readability */
+    /* Continuous burgundy overlay with subtle texture pattern */
     .banner-background::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(107, 17, 38, 0.92) 0%,
-        rgba(107, 17, 38, 0.88) 40%,
-        rgba(107, 17, 38, 0.85) 70%,
-        rgba(107, 17, 38, 0.75) 100%
-      );
+      background: 
+        linear-gradient(
+          90deg,
+          rgba(107, 17, 38, 0.95) 0%,
+          rgba(107, 17, 38, 0.88) 45%,
+          rgba(107, 17, 38, 0.82) 70%,
+          rgba(107, 17, 38, 0.75) 100%
+        ),
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.03) 2px,
+          rgba(0, 0, 0, 0.03) 4px
+        );
       z-index: 1;
     }
     
-    /* Content wrapper holds text + featured image */
+    /* Content wrapper holds text + featured image - centered with max-width */
     .banner-content-wrapper {
       position: relative;
       z-index: 2;
       width: 100%;
+      max-width: 1600px;
       height: 100%;
+      margin: 0 auto;
       display: flex;
       align-items: center;
-      gap: clamp(30px, 4vw, 60px);
-      padding: clamp(50px, 7vw, 90px);
+      gap: clamp(40px, 5vw, 80px);
+      padding: clamp(50px, 7vw, 90px) clamp(60px, 8vw, 120px);
     }
     
     /* Text area on LEFT */
     .banner-text-area {
       flex: 1;
-      max-width: 520px;
+      max-width: 580px;
       position: relative;
     }
     
     /* Large outlined number background */
     .banner-number {
       position: absolute;
-      top: -50px;
-      left: -30px;
+      top: -60px;
+      left: -35px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(140px, 20vw, 220px);
+      font-size: clamp(160px, 22vw, 260px);
       font-weight: 700;
       line-height: 1;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(232, 192, 106, 0.15);
+      -webkit-text-stroke: 1px rgba(232, 192, 106, 0.12);
       pointer-events: none;
       user-select: none;
       z-index: 0;
@@ -391,11 +404,11 @@
     /* Category label */
     .banner-eyebrow {
       font-size: 11px;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--gold-lt);
-      margin-bottom: 16px;
+      color: var(--gold);
+      margin-bottom: 20px;
       position: relative;
       z-index: 1;
     }
@@ -403,61 +416,64 @@
     /* Main heading */
     .banner-heading {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(42px, 6vw, 72px);
+      font-size: clamp(46px, 6.5vw, 82px);
       font-weight: 300;
       line-height: 1.05;
       color: var(--cream);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       position: relative;
       z-index: 1;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
     }
     
     /* Description text */
     .banner-body {
-      font-size: clamp(16px, 1.7vw, 19px);
+      font-size: clamp(16px, 1.8vw, 20px);
       font-weight: 300;
       line-height: 1.8;
-      color: rgba(250, 246, 238, 0.9);
+      color: rgba(250, 246, 238, 0.92);
       position: relative;
       z-index: 1;
+      max-width: 520px;
     }
     
-    /* Featured image box on RIGHT (mirrored from background) */
+    /* Featured image box on RIGHT - LARGER SCALE */
     .banner-featured-image {
-      flex: 0 0 clamp(300px, 38%, 450px);
-      height: 75%;
+      flex: 0 0 clamp(420px, 42%, 580px);
+      height: 82%;
       position: relative;
       overflow: hidden;
-      border: 3px solid rgba(232, 192, 106, 0.4);
+      border: 4px solid rgba(232, 192, 106, 0.45);
       box-shadow: 
-        0 12px 40px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(232, 192, 106, 0.1) inset;
-      background: rgba(0, 0, 0, 0.1);
+        0 16px 56px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(232, 192, 106, 0.15) inset,
+        0 8px 32px rgba(201, 151, 58, 0.2);
+      background: rgba(0, 0, 0, 0.15);
     }
     
-    /* Image inside featured box - clean, no overlay */
+    /* Image inside featured box - clean, high detail */
     .banner-featured-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: contrast(1.05) saturate(1.1);
     }
     
-    /* Pagination dots */
+    /* Pagination dots - floating over burgundy */
     .banner-dots {
       position: absolute;
-      bottom: 35px;
+      bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 14px;
+      gap: 16px;
       z-index: 10;
     }
     
     .banner-dot {
-      width: 11px;
-      height: 11px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       border: 2px solid rgba(250, 246, 238, 0.6);
       background: transparent;
@@ -475,27 +491,24 @@
     .banner-dot.active {
       background: var(--gold-lt);
       border-color: var(--gold-lt);
-      transform: scale(1.2);
+      transform: scale(1.25);
     }
     
     /* Responsive adjustments */
     @media (max-width: 1200px) {
-      .banner-carousel {
-        width: 75%;
+      .banner-content-wrapper {
+        padding: clamp(40px, 6vw, 70px) clamp(50px, 7vw, 90px);
       }
       .banner-featured-image {
-        flex: 0 0 clamp(260px, 35%, 380px);
+        flex: 0 0 clamp(360px, 38%, 480px);
       }
     }
     
     @media (max-width: 900px) {
-      .banner-carousel {
-        width: 85%;
-      }
       .banner-content-wrapper {
         flex-direction: column;
         justify-content: center;
-        gap: 28px;
+        gap: 32px;
         padding: clamp(40px, 6vw, 60px);
       }
       .banner-text-area {
@@ -504,13 +517,13 @@
       .banner-featured-image {
         flex: 0 0 auto;
         width: 100%;
-        max-width: 450px;
-        height: 250px;
+        max-width: 500px;
+        height: 280px;
       }
       .banner-number {
-        font-size: 100px;
-        top: -30px;
-        left: -20px;
+        font-size: 120px;
+        top: -35px;
+        left: -25px;
       }
     }
     
@@ -520,10 +533,10 @@
         height: clamp(600px, 70vh, 800px);
       }
       .banner-background::after {
-        background: rgba(107, 17, 38, 0.9);
+        background: rgba(107, 17, 38, 0.92);
       }
       .banner-featured-image {
-        height: 220px;
+        height: 240px;
       }
     }
 
@@ -2266,11 +2279,18 @@
       /* Hidden until the main site reveals — toggled by JS */
       opacity: 0;
       visibility: hidden;
-      transition: opacity .6s ease, visibility .6s ease;
+      transition: opacity .6s ease, visibility .6s ease, transform 0.4s ease-in-out;
     }
     #arc-dock.visible {
       opacity: 1;
       visibility: visible;
+      transform: translateY(-50%) translateX(0);
+    }
+    
+    /* Auto-hide state - slides off screen to the right */
+    #arc-dock.menu-hidden {
+      transform: translateY(-50%) translateX(85%);
+      opacity: 0.3;
     }
 
     /* Semi-circle wheel — with punched-out inner hollow via mask */
@@ -3916,6 +3936,71 @@ setTimeout(()=>{
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  // ═══════════════════════════════════════════════════════
+  // AUTO-HIDE FEATURE: Hide dock after 2.5s of idle
+  // ═══════════════════════════════════════════════════════
+  let idleTimer = null;
+  let isHovering = false;
+  const IDLE_DELAY = 2500; // 2.5 seconds
+
+  function showMenu() {
+    if (dock) {
+      dock.classList.remove('menu-hidden');
+    }
+  }
+
+  function hideMenu() {
+    // Only hide if not hovering over the dock
+    if (dock && !isHovering) {
+      dock.classList.add('menu-hidden');
+    }
+  }
+
+  function resetIdleTimer() {
+    // Clear existing timer
+    if (idleTimer) {
+      clearTimeout(idleTimer);
+    }
+    
+    // Show menu immediately on activity
+    showMenu();
+    
+    // Set new timer to hide after idle period
+    // Only set timer if not hovering
+    if (!isHovering) {
+      idleTimer = setTimeout(hideMenu, IDLE_DELAY);
+    }
+  }
+
+  // Track mouse hover over dock
+  if (dock) {
+    dock.addEventListener('mouseenter', () => {
+      isHovering = true;
+      // Clear any pending hide timer
+      if (idleTimer) {
+        clearTimeout(idleTimer);
+      }
+      showMenu();
+    });
+
+    dock.addEventListener('mouseleave', () => {
+      isHovering = false;
+      // Restart idle timer when leaving dock
+      resetIdleTimer();
+    });
+  }
+
+  // Listen for user activity
+  window.addEventListener('mousemove', resetIdleTimer, { passive: true });
+  window.addEventListener('scroll', resetIdleTimer, { passive: true });
+  
+  // Start the initial timer after dock becomes visible
+  setTimeout(() => {
+    if (dock && dock.classList.contains('visible')) {
+      resetIdleTimer();
+    }
+  }, 1000); // Wait 1 second after page load before starting auto-hide
 
   // Cart badge sync from localStorage
   function syncBadge() {
