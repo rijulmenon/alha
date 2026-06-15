@@ -542,12 +542,10 @@
 
     /* ═══════════════════════════ STORY TIMELINE ═══ */
     #menu {
-      position:relative; min-height:360vh; padding:80px 0 120px; background:var(--bg);
+      position:relative; padding:0; background:var(--bg);
     }
     #menu::before {
-      content:''; position:absolute; inset:0; pointer-events:none;
-      background-image:radial-gradient(rgba(42,26,26,.04) 1px,transparent 0);
-      background-size:32px 32px;
+      display: none;
     }
     #path-canvas {
       position:absolute; top:0; left:0; width:100%; height:100%;
@@ -639,7 +637,8 @@
     /* ═══════════════════════════ QUOTE ═══ */
     #quote-interlude {
       background:var(--primary); position:relative; overflow:hidden;
-      padding:clamp(64px,10vh,120px) clamp(32px,8vw,120px); text-align:center;
+      padding:clamp(48px,6vh,80px) clamp(32px,8vw,120px); text-align:center;
+      margin-bottom: 0;
     }
     #quote-interlude::before {
       content:'"'; position:absolute;
@@ -683,10 +682,11 @@
 
     /* ═══════════════════════════ BLOG SECTION ═══ */
     #blog {
-      padding: clamp(60px,8vh,80px) 0;
+      padding: clamp(40px,5vh,60px) 0;
       background: var(--bg);
       max-width: 100%;
       overflow: hidden;
+      margin-top: 0;
     }
     
     /* Constrain all blog content to left 70% to avoid arc dock */
@@ -714,306 +714,161 @@
       margin-bottom: 24px;
     }
 
-    /* Category Filters - positioned directly below subtitle */
-    .blog-filters {
+    /* Journal filters */
+    .journal-filters {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
-    .blog-filter-btn {
-      padding: 10px 24px;
+    .journal-filter-btn {
+      padding: 9px 22px;
       background: transparent;
       border: 1px solid rgba(201,151,58,.25);
       color: var(--text);
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-family: 'Jost', sans-serif;
       cursor: pointer;
-      transition: all .3s ease;
+      transition: all .25s ease;
     }
-    .blog-filter-btn:hover {
-      border-color: var(--gold);
-      color: var(--primary);
-    }
-    .blog-filter-btn.active {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--bg-dark);
-    }
+    .journal-filter-btn:hover { border-color: var(--gold); color: var(--primary); }
+    .journal-filter-btn.jfb-active { background: var(--gold); border-color: var(--gold); color: var(--bg-dark); }
 
-    /* 3-4 Column Blog Grid for Tall Portrait Cards */
-    .blog-grid {
+    /* Journal grid */
+    .journal-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 32px;
-      margin-bottom: 80px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 60px;
     }
-    
-    /* Tall Portrait Card Layout */
-    .blog-card {
-      background: #ffffff;
-      border: 1px solid rgba(201,151,58,.2);
-      overflow: hidden;
-      transition: transform .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1);
-      position: relative;
+    @media (max-width: 1200px) { .journal-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .journal-grid { grid-template-columns: 1fr; } }
+
+    /* Journal card — compact rectangle */
+    .journal-card {
+      background: #fff;
+      border: 1px solid rgba(201,151,58,.18);
       display: flex;
       flex-direction: column;
-      height: 100%;
-      min-height: 520px;
-      cursor: pointer;
-    }
-    
-    /* Tall Image at top - Portrait orientation */
-    .blog-card-image {
-      position: relative;
-      width: 100%;
-      height: 380px;
-      background: linear-gradient(135deg,
-        rgba(107,17,38,.08) 0%,
-        rgba(201,151,58,.08) 50%,
-        rgba(107,17,38,.08) 100%);
       overflow: hidden;
-      transition: transform .5s cubic-bezier(.4,0,.2,1);
-      flex-shrink: 0;
+      cursor: pointer;
+      transition: transform .3s ease, box-shadow .3s ease;
+      position: relative;
     }
-    
-    /* Actual image styling */
-    .blog-card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .5s cubic-bezier(.4,0,.2,1);
+    .journal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(107,17,38,.13);
     }
-    .blog-card-image::after {
+    .journal-card::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 25% 25%, rgba(232,192,106,.15) 0%, transparent 60%),
-        radial-gradient(circle at 75% 75%, rgba(107,17,38,.1) 0%, transparent 50%);
-    }
-    .blog-card:hover .blog-card-image {
-      transform: scale(1.08);
-    }
-    .blog-card:hover .blog-card-image img {
-      transform: scale(1.08);
-    }
-    
-    /* Gold top line on hover */
-    .blog-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
+      top: 0; left: 0; right: 0;
+      height: 2px;
       background: linear-gradient(90deg, var(--gold), var(--gold-lt));
       transform: scaleX(0);
       transform-origin: left;
       transition: transform .3s ease;
-      z-index: 2;
     }
-    .blog-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(42,26,26,.2);
+    .journal-card:hover::after { transform: scaleX(1); }
+
+    /* Card image — fixed short height for rectangular look */
+    .journal-card-img {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: rgba(107,17,38,.06);
     }
-    .blog-card:hover::before {
-      transform: scaleX(1);
+    .journal-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
     }
-    
-    /* Content area below image */
-    .blog-card-content {
-      padding: 32px;
+    .journal-card:hover .journal-card-img img { transform: scale(1.06); }
+
+    /* Card body */
+    .journal-card-body {
+      padding: 20px 22px 24px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      background: #ffffff;
     }
-    
-    .blog-category {
+    .journal-card-cat {
       display: inline-block;
       font-size: 9px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 16px;
-      padding: 6px 14px;
-      background: rgba(201,151,58,.12);
-      border-radius: 2px;
-      align-self: flex-start;
       font-weight: 600;
+      margin-bottom: 10px;
     }
-    
-    .blog-card h3 {
+    .journal-card-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(22px,2.5vw,28px);
+      font-size: clamp(17px, 1.6vw, 21px);
       font-weight: 400;
       color: var(--primary);
-      margin: 0 0 20px 0;
-      line-height: 1.25;
-      flex-grow: 0;
+      line-height: 1.3;
+      margin: 0 0 10px 0;
     }
-    
-    .blog-excerpt {
-      font-size: 15px;
-      line-height: 1.8;
+    .journal-card-excerpt {
+      font-size: 13px;
+      line-height: 1.7;
       color: var(--text-lt);
-      margin: 0 0 20px 0;
+      margin: 0 0 16px 0;
       flex-grow: 1;
-    }
-    
-    /* Blog Meta Info */
-    .blog-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: auto;
-      padding-top: 20px;
-      border-top: 1px solid rgba(201,151,58,.15);
-      font-size: 12px;
-      color: var(--text-lt);
-    }
-    
-    .blog-date {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    .blog-read-time {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    /* Read More Link */
-    .blog-read-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 16px;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
-      text-decoration: none;
-      transition: gap .3s ease;
-    }
-    
-    .blog-read-more:hover {
-      gap: 12px;
-    }
-    
-    /* Loading Skeleton */
-    .blog-card-skeleton {
-      background: #ffffff;
-      border: 1px solid rgba(201,151,58,.2);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      min-height: 520px;
+    }
+    .journal-card-meta {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      color: var(--text-lt);
+      padding-top: 14px;
+      border-top: 1px solid rgba(201,151,58,.12);
+      margin-top: auto;
     }
-    
-    .blog-card-skeleton::before {
+    .journal-card-meta span { display: flex; align-items: center; gap: 5px; }
+
+    /* Skeleton */
+    .journal-card-skeleton {
+      background: #fff;
+      border: 1px solid rgba(201,151,58,.15);
+      overflow: hidden;
+      height: 340px;
+    }
+    .journal-card-skeleton::before {
       content: '';
-      height: 380px;
-      background: linear-gradient(90deg,
-        rgba(201,151,58,.08) 0%,
-        rgba(201,151,58,.15) 50%,
-        rgba(201,151,58,.08) 100%);
+      display: block;
+      height: 180px;
+      background: linear-gradient(90deg, rgba(201,151,58,.06) 25%, rgba(201,151,58,.14) 50%, rgba(201,151,58,.06) 75%);
       background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
+      animation: jSkeleton 1.4s infinite;
     }
-    
-    .blog-card-skeleton::after {
+    .journal-card-skeleton::after {
       content: '';
-      flex: 1;
-      padding: 32px;
-      background: linear-gradient(90deg,
-        rgba(201,151,58,.05) 0%,
-        rgba(201,151,58,.1) 50%,
-        rgba(201,151,58,.05) 100%);
+      display: block;
+      height: 160px;
+      background: linear-gradient(90deg, rgba(201,151,58,.04) 25%, rgba(201,151,58,.09) 50%, rgba(201,151,58,.04) 75%);
       background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
+      animation: jSkeleton 1.4s infinite .2s;
     }
-    
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
+    @keyframes jSkeleton {
+      0%   { background-position: 200% 0; }
       100% { background-position: -200% 0; }
     }
-    
-    /* Empty State */
-    .blog-empty {
-      text-align: center;
-      padding: 80px 20px;
-      color: var(--text-lt);
-    }
-    
-    .empty-state-icon {
-      font-size: 64px;
-      margin-bottom: 24px;
-      opacity: 0.3;
-    }
-    
-    .blog-empty h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
-      font-weight: 300;
-      color: var(--primary);
-      margin-bottom: 12px;
-    }
-    
-    .blog-empty p {
-      font-size: 16px;
-      color: var(--text-lt);
-    }
 
-    /* Responsive - Desktop: 3-4 cards */
-    @media (min-width: 1400px) {
-      .blog-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-    
-    @media (min-width: 1024px) and (max-width: 1399px) {
-      .blog-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
-    /* Tablet: 2 cards */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      .blog-wrapper {
-        max-width: 85%;
-      }
-      .blog-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 28px;
-      }
-    }
-    
-    /* Mobile: 1 card */
+    /* Responsive */
     @media (max-width: 767px) {
-      .blog-wrapper {
-        max-width: 100%;
-      }
-      .blog-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .blog-header {
-        text-align: center;
-      }
-      .blog-header p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .blog-filters {
-        justify-content: center;
-      }
+      .blog-wrapper { max-width: 100%; }
+      .blog-header { text-align: center; }
+      .journal-filters { justify-content: center; }
     }
 
     /* ═══════════════════════════ CONTACT SECTION ═══ */
@@ -2879,40 +2734,37 @@
       <h2>Journal</h2>
       <p>Stories, celebrations, and the craft behind every creation</p>
       
-      <!-- Category Filters - positioned directly below subtitle -->
-      <div class="blog-filters">
-        <button class="blog-filter-btn active" data-filter="all">ALL</button>
-        <button class="blog-filter-btn" data-filter="events">EVENTS</button>
-        <button class="blog-filter-btn" data-filter="recipes">RECIPES</button>
-        <button class="blog-filter-btn" data-filter="stories">STORIES</button>
-        <button class="blog-filter-btn" data-filter="behind-the-scenes">BEHIND THE SCENES</button>
+      <!-- Category Filters -->
+      <div class="journal-filters">
+        <button class="journal-filter-btn jfb-active" data-jfilter="all">ALL</button>
+        <button class="journal-filter-btn" data-jfilter="events">EVENTS</button>
+        <button class="journal-filter-btn" data-jfilter="recipes">RECIPES</button>
+        <button class="journal-filter-btn" data-jfilter="stories">STORIES</button>
+        <button class="journal-filter-btn" data-jfilter="behind-the-scenes">BEHIND THE SCENES</button>
       </div>
     </div>
 
-    <!-- Loading State -->
-    <div id="blog-loading" class="blog-loading" style="display: none;">
-      <div class="blog-grid">
-        <div class="blog-card-skeleton"></div>
-        <div class="blog-card-skeleton"></div>
-        <div class="blog-card-skeleton"></div>
-        <div class="blog-card-skeleton"></div>
-        <div class="blog-card-skeleton"></div>
-        <div class="blog-card-skeleton"></div>
+    <!-- Journal Posts Container -->
+    <div id="journal-posts-container">
+      <!-- Skeleton loading shown initially -->
+      <div id="journal-skeleton" class="journal-grid">
+        <div class="journal-card-skeleton"></div>
+        <div class="journal-card-skeleton"></div>
+        <div class="journal-card-skeleton"></div>
+        <div class="journal-card-skeleton"></div>
+        <div class="journal-card-skeleton"></div>
+        <div class="journal-card-skeleton"></div>
+      </div>
+      <!-- Posts grid, hidden until loaded -->
+      <div id="journal-grid" class="journal-grid" style="display:none;"></div>
+      <!-- Empty state -->
+      <div id="journal-empty" style="display:none; text-align:center; padding:60px 20px;">
+        <div style="font-size:48px; opacity:0.3; margin-bottom:16px;">📝</div>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--primary); margin-bottom:8px;">No Journal Entries Yet</h3>
+        <p style="color:var(--text-lt);">Check back soon for stories, recipes, and behind-the-scenes content.</p>
       </div>
     </div>
 
-    <!-- Empty State -->
-    <div id="blog-empty" class="blog-empty" style="display: none;">
-      <div class="empty-state-icon">📝</div>
-      <h3>No Journal Entries Yet</h3>
-      <p>Check back soon for stories, recipes, and behind-the-scenes content.</p>
-    </div>
-
-    <!-- Dynamic Blog Grid - will be populated by JavaScript -->
-    <div id="blog-grid" class="blog-grid">
-      
-      <!-- Cards will be dynamically inserted here by JavaScript -->
-    </div><!-- End blog-grid -->
   </div>
 </section>
 
@@ -3390,172 +3242,97 @@
 <script src="js/journal-service.js"></script>
 <script>
 /* ════════════════════════════════════════════════════════
-   JOURNAL/BLOG INTEGRATION WITH SUPABASE
+   JOURNAL INTEGRATION WITH SUPABASE
 ════════════════════════════════════════════════════════ */
-(async function initJournal() {
-  const blogGrid = document.getElementById('blog-grid');
-  const blogLoading = document.getElementById('blog-loading');
-  const blogEmpty = document.getElementById('blog-empty');
-  const filterButtons = document.querySelectorAll('.blog-filter-btn');
-  
+(function() {
+  // Helper: wait for supabaseClient to be ready
+  function waitForSupabase() {
+    return new Promise(resolve => {
+      const check = () => {
+        if (typeof supabaseClient !== 'undefined' && supabaseClient !== null &&
+            typeof supabaseClient.from === 'function') {
+          resolve();
+        } else {
+          setTimeout(check, 100);
+        }
+      };
+      check();
+    });
+  }
+
+  const grid     = document.getElementById('journal-grid');
+  const skeleton = document.getElementById('journal-skeleton');
+  const empty    = document.getElementById('journal-empty');
+
+  if (!grid) { console.warn('journal-grid not found'); return; }
+
   let allPosts = [];
-  let currentFilter = 'all';
-  
-  // Show loading state
-  function showLoading() {
-    blogLoading.style.display = 'block';
-    blogGrid.style.display = 'none';
-    blogEmpty.style.display = 'none';
+
+  function showGrid()     { skeleton.style.display='none'; grid.style.display='grid'; empty.style.display='none'; }
+  function showEmpty()    { skeleton.style.display='none'; grid.style.display='none'; empty.style.display='block'; }
+
+  function fmt(d) {
+    return new Date(d).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
   }
-  
-  // Show empty state
-  function showEmpty() {
-    blogLoading.style.display = 'none';
-    blogGrid.style.display = 'none';
-    blogEmpty.style.display = 'block';
-  }
-  
-  // Show posts
-  function showPosts() {
-    blogLoading.style.display = 'none';
-    blogGrid.style.display = 'grid';
-    blogEmpty.style.display = 'none';
-  }
-  
-  // Format date
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  }
-  
-  // Create blog card HTML
-  function createBlogCard(post) {
-    const categoryName = post.category?.name || 'Uncategorized';
-    const categorySlug = post.category?.slug || 'uncategorized';
-    const imageUrl = post.featured_image_url || 'events1.jpeg';
-    const readTime = post.read_time_minutes || 5;
-    const publishDate = formatDate(post.published_at || post.created_at);
-    
+
+  function makeCard(p) {
+    const cat  = p.category?.name || 'Journal';
+    const catS = p.category?.slug || '';
+    const img  = p.featured_image_url || 'events1.jpeg';
+    const rt   = p.read_time_minutes || 5;
+    const date = fmt(p.published_at || p.created_at);
     return `
-      <article class="blog-card" data-category="${categorySlug}">
-        <div class="blog-card-image">
-          <img src="${imageUrl}" alt="${post.title}" loading="lazy" />
+      <article class="journal-card" data-cat="${catS}">
+        <div class="journal-card-img">
+          <img src="${img}" alt="${p.title}" loading="lazy">
         </div>
-        <div class="blog-card-content">
-          <span class="blog-category">${categoryName.toUpperCase()}</span>
-          <h3>${post.title}</h3>
-          <p class="blog-excerpt">${post.excerpt}</p>
-          <div class="blog-meta">
-            <span class="blog-date">
-              <i class="ti ti-calendar"></i>
-              ${publishDate}
-            </span>
-            <span class="blog-read-time">
-              <i class="ti ti-clock"></i>
-              ${readTime} min read
-            </span>
+        <div class="journal-card-body">
+          <span class="journal-card-cat">${cat}</span>
+          <h3 class="journal-card-title">${p.title}</h3>
+          <p class="journal-card-excerpt">${p.excerpt || ''}</p>
+          <div class="journal-card-meta">
+            <span>📅 ${date}</span>
+            <span>⏱ ${rt} min read</span>
           </div>
-          <a href="#" class="blog-read-more" data-post-slug="${post.slug}">
-            Read More
-            <i class="ti ti-arrow-right"></i>
-          </a>
         </div>
-      </article>
-    `;
+      </article>`;
   }
-  
-  // Render posts
-  function renderPosts(posts) {
-    if (!posts || posts.length === 0) {
-      showEmpty();
-      return;
-    }
-    
-    blogGrid.innerHTML = posts.map(post => createBlogCard(post)).join('');
-    showPosts();
-    
-    // Add click handlers for "Read More" links
-    const readMoreLinks = blogGrid.querySelectorAll('.blog-read-more');
-    readMoreLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const slug = link.dataset.postSlug;
-        console.log('Opening post:', slug);
-        // TODO: Implement post detail view or navigation
-        alert(`Post detail view for: ${slug}\n\nThis would open the full post in a modal or navigate to a detail page.`);
-      });
-    });
+
+  function render(posts) {
+    if (!posts || posts.length === 0) { showEmpty(); return; }
+    grid.innerHTML = posts.map(makeCard).join('');
+    showGrid();
   }
-  
-  // Filter posts
-  function filterPosts(category) {
-    currentFilter = category;
-    
-    if (category === 'all') {
-      renderPosts(allPosts);
-    } else {
-      const filtered = allPosts.filter(post => 
-        post.category?.slug === category
-      );
-      renderPosts(filtered);
-    }
-    
-    // Update active filter button
-    filterButtons.forEach(btn => {
-      if (btn.dataset.filter === category) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-  }
-  
-  // Fetch posts from Supabase
-  async function fetchPosts() {
-    showLoading();
-    
-    try {
-      // Check if journalService is available
-      if (typeof journalService === 'undefined') {
-        console.error('Journal service not loaded');
-        showEmpty();
-        return;
-      }
-      
-      const { data, error } = await journalService.getPosts({
-        limit: 12
-      });
-      
-      if (error) {
-        console.error('Error fetching posts:', error);
-        showEmpty();
-        return;
-      }
-      
-      allPosts = data || [];
-      renderPosts(allPosts);
-      
-    } catch (error) {
-      console.error('Exception fetching posts:', error);
-      showEmpty();
-    }
-  }
-  
-  // Initialize filter buttons
-  filterButtons.forEach(btn => {
+
+  // Filter buttons
+  document.querySelectorAll('.journal-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter;
-      filterPosts(filter);
+      document.querySelectorAll('.journal-filter-btn').forEach(b => b.classList.remove('jfb-active'));
+      btn.classList.add('jfb-active');
+      const f = btn.dataset.jfilter;
+      if (f === 'all') { render(allPosts); }
+      else { render(allPosts.filter(p => p.category?.slug === f)); }
     });
   });
-  
-  // Fetch posts on page load
-  await fetchPosts();
-  
+
+  // Fetch and display
+  waitForSupabase().then(async () => {
+    try {
+      const { data, error } = await supabaseClient
+        .from('journal_posts')
+        .select(`id, title, slug, excerpt, featured_image_url, author_name,
+                 is_featured, read_time_minutes, published_at, created_at,
+                 journal_categories ( id, name, slug )`)
+        .eq('is_published', true)
+        .order('published_at', { ascending: false })
+        .limit(12);
+
+      if (error) { console.error('Journal fetch error:', error); showEmpty(); return; }
+      allPosts = (data || []).map(p => ({ ...p, category: p.journal_categories }));
+      console.log('Journal: loaded', allPosts.length, 'posts');
+      render(allPosts);
+    } catch(e) { console.error('Journal exception:', e); showEmpty(); }
+  });
 })();
 </script>
 

@@ -49,10 +49,10 @@ let supabaseClient = null;
   // Load environment configuration
   const envConfig = await loadEnvConfig();
   
-  // Get Supabase credentials from environment or use placeholders
-  // IMPORTANT: Replace these with your actual credentials in the .env file
-  let SUPABASE_URL = envConfig.SUPABASE_URL || 'YOUR_SUPABASE_URL_HERE';
-  const SUPABASE_ANON_KEY = envConfig.SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY_HERE';
+  // Get Supabase credentials from environment or use hardcoded values
+  // IMPORTANT: These are your actual Supabase credentials
+  let SUPABASE_URL = envConfig.SUPABASE_URL || 'https://qmsybuomyrxlhhakiqor.supabase.co';
+  const SUPABASE_ANON_KEY = envConfig.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtc3lidW9teXJ4bGhoYWtpcW9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MzA2ODEsImV4cCI6MjA5NjUwNjY4MX0.97O9mBIK_ylMHVB0AaT0_dGeUYp97ZtiZBF9_glF0bk';
   
   // Clean up URL - remove trailing slashes and /rest/v1/ if present
   if (SUPABASE_URL && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') {

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal Debug</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 20px;
+      background: #1e1e1e;
+      color: #d4d4d4;
+    }
+    .log { margin: 5px 0; padding: 8px; background: #2d2d2d; border-left: 3px solid #4ec9b0; }
+    .error { border-left-color: #f48771; }
+    .success { border-left-color: #4ec9b0; }
+    .info { border-left-color: #9cdcfe; }
+    button {
+      background: #6b1126;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover { background: #8b1636; }
+    #output { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>🔍 Journal Section Debug</h1>
+  
+  <button onclick="checkElements()">1. Check DOM Elements</button>
+  <button onclick="checkSupabase()">2. Check Supabase</button>
+  <button onclick="testFetch()">3. Test Fetch Posts</button>
+  <button onclick="clearLogs()">Clear Logs</button>
+  
+  <div id="output"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/journal-service.js"></script>
+
+  <script>
+    const output = document.getElementById('output');
+    
+    function log(message, type = 'info') {
+      const div = document.createElement('div');
+      div.className = `log ${type}`;
+      div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      output.appendChild(div);
+      output.scrollTop = output.scrollHeight;
+    }
+
+    function clearLogs() {
+      output.innerHTML = '';
+    }
+
+    function checkElements() {
+      log('Checking DOM elements...', 'info');
+      
+      const blogGrid = document.getElementById('blog-grid');
+      const blogLoading = document.getElementById('blog-loading');
+      const blogEmpty = document.getElementById('blog-empty');
+      const filterButtons = document.querySelectorAll('.blog-filter-btn');
+      
+      log(`blog-grid: ${blogGrid ? '✅ Found' : '❌ Not found'}`, blogGrid ? 'success' : 'error');
+      log(`blog-loading: ${blogLoading ? '✅ Found' : '❌ Not found'}`, blogLoading ? 'success' : 'error');
+      log(`blog-empty: ${blogEmpty ? '✅ Found' : '❌ Not found'}`, blogEmpty ? 'success' : 'error');
+      log(`filter buttons: ${filterButtons.length} found`, filterButtons.length > 0 ? 'success' : 'error');
+      
+      if (!blogGrid || !blogLoading || !blogEmpty) {
+        log('⚠️ Some elements are missing! Make sure you\'re testing on index.html', 'error');
+      }
+    }
+
+    async function checkSupabase() {
+      log('Checking Supabase...', 'info');
+      
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      if (typeof supabaseClient === 'undefined' || !supabaseClient) {
+        log('❌ supabaseClient not found', 'error');
+        return;
+      }
+      
+      log('✅ supabaseClient exists', 'success');
+      
+      if (typeof journalService === 'undefined' || !journalService) {
+        log('❌ journalService not found', 'error');
+        return;
+      }
+      
+      log('✅ journalService exists', 'success');
+    }
+
+    async function testFetch() {
+      log('Testing fetch posts...', 'info');
+      
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      if (typeof journalService === 'undefined') {
+        log('❌ journalService not available', 'error');
+        return;
+      }
+      
+      try {
+        log('Calling journalService.getPosts()...', 'info');
+        const { data, error } = await journalService.getPosts({ limit: 12 });
+        
+        if (error) {
+          log(`❌ Error: ${error.message || error}`, 'error');
+          return;
+        }
+        
+        if (!data || data.length === 0) {
+          log('⚠️ No posts returned', 'error');
+          return;
+        }
+        
+        log(`✅ Successfully fetched ${data.length} posts`, 'success');
+        data.forEach((post, i) => {
+          log(`  ${i + 1}. ${post.title}`, 'info');
+        });
+        
+      } catch (err) {
+        log(`❌ Exception: ${err.message}`, 'error');
+      }
+    }
+
+    // Auto-run checks
+    setTimeout(() => {
+      log('=== Auto-running checks ===', 'info');
+      checkElements();
+      setTimeout(() => checkSupabase(), 500);
+      setTimeout(() => testFetch(), 2000);
+    }, 500);
+  </script>
+</body>
+</html>
