@@ -730,49 +730,62 @@
       color: var(--bg-dark);
     }
 
-    /* 3-Column Blog Grid */
+    /* 3-4 Column Blog Grid for Tall Portrait Cards */
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
       margin-bottom: 80px;
     }
     
-    /* Vertical Card Layout */
+    /* Tall Portrait Card Layout */
     .blog-card {
       background: #ffffff;
       border: 1px solid rgba(201,151,58,.2);
       overflow: hidden;
-      transition: transform .3s ease, box-shadow .3s ease;
+      transition: transform .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1);
       position: relative;
       display: flex;
       flex-direction: column;
       height: 100%;
+      min-height: 520px;
+      cursor: pointer;
     }
     
-    /* Image placeholder at top */
+    /* Tall Image at top - Portrait orientation */
     .blog-card-image {
       position: relative;
       width: 100%;
-      height: 320px;
-      background: linear-gradient(135deg, 
-        rgba(107,17,38,.08) 0%, 
+      height: 380px;
+      background: linear-gradient(135deg,
+        rgba(107,17,38,.08) 0%,
         rgba(201,151,58,.08) 50%,
         rgba(107,17,38,.08) 100%);
       overflow: hidden;
-      transition: transform .3s ease;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
       flex-shrink: 0;
+    }
+    
+    /* Actual image styling */
+    .blog-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
     }
     .blog-card-image::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: 
+      background:
         radial-gradient(circle at 25% 25%, rgba(232,192,106,.15) 0%, transparent 60%),
         radial-gradient(circle at 75% 75%, rgba(107,17,38,.1) 0%, transparent 50%);
     }
     .blog-card:hover .blog-card-image {
-      transform: scale(1.05);
+      transform: scale(1.08);
+    }
+    .blog-card:hover .blog-card-image img {
+      transform: scale(1.08);
     }
     
     /* Gold top line on hover */
@@ -790,8 +803,8 @@
       z-index: 2;
     }
     .blog-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(42,26,26,.15);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(42,26,26,.2);
     }
     .blog-card:hover::before {
       transform: scaleX(1);
@@ -834,27 +847,149 @@
       font-size: 15px;
       line-height: 1.8;
       color: var(--text-lt);
-      margin: 0;
+      margin: 0 0 20px 0;
       flex-grow: 1;
     }
+    
+    /* Blog Meta Info */
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(201,151,58,.15);
+      font-size: 12px;
+      color: var(--text-lt);
+    }
+    
+    .blog-date {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .blog-read-time {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    /* Read More Link */
+    .blog-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap .3s ease;
+    }
+    
+    .blog-read-more:hover {
+      gap: 12px;
+    }
+    
+    /* Loading Skeleton */
+    .blog-card-skeleton {
+      background: #ffffff;
+      border: 1px solid rgba(201,151,58,.2);
+      overflow: hidden;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .blog-card-skeleton::before {
+      content: '';
+      height: 380px;
+      background: linear-gradient(90deg,
+        rgba(201,151,58,.08) 0%,
+        rgba(201,151,58,.15) 50%,
+        rgba(201,151,58,.08) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    
+    .blog-card-skeleton::after {
+      content: '';
+      flex: 1;
+      padding: 32px;
+      background: linear-gradient(90deg,
+        rgba(201,151,58,.05) 0%,
+        rgba(201,151,58,.1) 50%,
+        rgba(201,151,58,.05) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    /* Empty State */
+    .blog-empty {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-lt);
+    }
+    
+    .empty-state-icon {
+      font-size: 64px;
+      margin-bottom: 24px;
+      opacity: 0.3;
+    }
+    
+    .blog-empty h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    
+    .blog-empty p {
+      font-size: 16px;
+      color: var(--text-lt);
+    }
 
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .blog-wrapper {
-        max-width: 80%;
-      }
+    /* Responsive - Desktop: 3-4 cards */
+    @media (min-width: 1400px) {
       .blog-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
+        grid-template-columns: repeat(4, 1fr);
       }
     }
     
-    @media (max-width: 768px) {
+    @media (min-width: 1024px) and (max-width: 1399px) {
+      .blog-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    /* Tablet: 2 cards */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .blog-wrapper {
+        max-width: 85%;
+      }
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+      }
+    }
+    
+    /* Mobile: 1 card */
+    @media (max-width: 767px) {
       .blog-wrapper {
         max-width: 100%;
       }
       .blog-grid {
         grid-template-columns: 1fr;
+        gap: 24px;
       }
       .blog-header {
         text-align: center;
@@ -2717,7 +2852,7 @@
 </section><!-- End #menu -->
 
 <!-- ══════════════════════════ SECTION: BLOG ══════════════════════════ -->
-<section id="blog" class="full-section" aria-label="Journal">
+<section id="blog" aria-label="Journal">
   <div class="blog-wrapper">
     
     <div class="blog-header">
@@ -2734,40 +2869,30 @@
       </div>
     </div>
 
-    <!-- 3-Column Blog Grid with Hardcoded Dummy Content -->
-    <div class="blog-grid">
-      
-      <!-- CARD 1: Recipes -->
-      <article class="blog-card" data-category="recipes">
-        <div class="blog-card-image"></div>
-        <div class="blog-card-content">
-          <span class="blog-category">RECIPES</span>
-          <h3>01. The Anatomy of a Perfect Tart Shell: Technical Guide</h3>
-          <p class="blog-excerpt">Mastering Pâtes Sablée: achieving a crisp, delicate shell with strict temperature control.</p>
-        </div>
-      </article>
-
-      <!-- CARD 2: Stories -->
-      <article class="blog-card" data-category="stories">
-        <div class="blog-card-image"></div>
-        <div class="blog-card-content">
-          <span class="blog-category">STORIES</span>
-          <h3>02. Artisanal Flavor Pairing: Earl Grey & Blackberry</h3>
-          <p class="blog-excerpt">A deep dive into infusing premium botanicals and floral notes into fine dessert creations.</p>
-        </div>
-      </article>
-
-      <!-- CARD 3: Behind the Scenes -->
-      <article class="blog-card" data-category="behind-the-scenes">
-        <div class="blog-card-image"></div>
-        <div class="blog-card-content">
-          <span class="blog-category">BEHIND THE SCENES</span>
-          <h3>03. Sourcing the Extraordinary: Our Madagascar Vanilla Journey</h3>
-          <p class="blog-excerpt">Exploring the humid forests for the world's finest, rarest orchid vanilla pods.</p>
-        </div>
-      </article>
-
+    <!-- Loading State -->
+    <div id="blog-loading" class="blog-loading" style="display: none;">
+      <div class="blog-grid">
+        <div class="blog-card-skeleton"></div>
+        <div class="blog-card-skeleton"></div>
+        <div class="blog-card-skeleton"></div>
+        <div class="blog-card-skeleton"></div>
+        <div class="blog-card-skeleton"></div>
+        <div class="blog-card-skeleton"></div>
+      </div>
     </div>
+
+    <!-- Empty State -->
+    <div id="blog-empty" class="blog-empty" style="display: none;">
+      <div class="empty-state-icon">📝</div>
+      <h3>No Journal Entries Yet</h3>
+      <p>Check back soon for stories, recipes, and behind-the-scenes content.</p>
+    </div>
+
+    <!-- Dynamic Blog Grid - will be populated by JavaScript -->
+    <div id="blog-grid" class="blog-grid">
+      
+      <!-- Cards will be dynamically inserted here by JavaScript -->
+    </div><!-- End blog-grid -->
   </div>
 </section>
 
@@ -3243,6 +3368,177 @@
 <script src="js/cart-service.js"></script>
 <script src="js/orders-service.js"></script>
 <script src="js/journal-service.js"></script>
+<script>
+/* ════════════════════════════════════════════════════════
+   JOURNAL/BLOG INTEGRATION WITH SUPABASE
+════════════════════════════════════════════════════════ */
+(async function initJournal() {
+  const blogGrid = document.getElementById('blog-grid');
+  const blogLoading = document.getElementById('blog-loading');
+  const blogEmpty = document.getElementById('blog-empty');
+  const filterButtons = document.querySelectorAll('.blog-filter-btn');
+  
+  let allPosts = [];
+  let currentFilter = 'all';
+  
+  // Show loading state
+  function showLoading() {
+    blogLoading.style.display = 'block';
+    blogGrid.style.display = 'none';
+    blogEmpty.style.display = 'none';
+  }
+  
+  // Show empty state
+  function showEmpty() {
+    blogLoading.style.display = 'none';
+    blogGrid.style.display = 'none';
+    blogEmpty.style.display = 'block';
+  }
+  
+  // Show posts
+  function showPosts() {
+    blogLoading.style.display = 'none';
+    blogGrid.style.display = 'grid';
+    blogEmpty.style.display = 'none';
+  }
+  
+  // Format date
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+  
+  // Create blog card HTML
+  function createBlogCard(post) {
+    const categoryName = post.category?.name || 'Uncategorized';
+    const categorySlug = post.category?.slug || 'uncategorized';
+    const imageUrl = post.featured_image_url || 'events1.jpeg';
+    const readTime = post.read_time_minutes || 5;
+    const publishDate = formatDate(post.published_at || post.created_at);
+    
+    return `
+      <article class="blog-card" data-category="${categorySlug}">
+        <div class="blog-card-image">
+          <img src="${imageUrl}" alt="${post.title}" loading="lazy" />
+        </div>
+        <div class="blog-card-content">
+          <span class="blog-category">${categoryName.toUpperCase()}</span>
+          <h3>${post.title}</h3>
+          <p class="blog-excerpt">${post.excerpt}</p>
+          <div class="blog-meta">
+            <span class="blog-date">
+              <i class="ti ti-calendar"></i>
+              ${publishDate}
+            </span>
+            <span class="blog-read-time">
+              <i class="ti ti-clock"></i>
+              ${readTime} min read
+            </span>
+          </div>
+          <a href="#" class="blog-read-more" data-post-slug="${post.slug}">
+            Read More
+            <i class="ti ti-arrow-right"></i>
+          </a>
+        </div>
+      </article>
+    `;
+  }
+  
+  // Render posts
+  function renderPosts(posts) {
+    if (!posts || posts.length === 0) {
+      showEmpty();
+      return;
+    }
+    
+    blogGrid.innerHTML = posts.map(post => createBlogCard(post)).join('');
+    showPosts();
+    
+    // Add click handlers for "Read More" links
+    const readMoreLinks = blogGrid.querySelectorAll('.blog-read-more');
+    readMoreLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slug = link.dataset.postSlug;
+        console.log('Opening post:', slug);
+        // TODO: Implement post detail view or navigation
+        alert(`Post detail view for: ${slug}\n\nThis would open the full post in a modal or navigate to a detail page.`);
+      });
+    });
+  }
+  
+  // Filter posts
+  function filterPosts(category) {
+    currentFilter = category;
+    
+    if (category === 'all') {
+      renderPosts(allPosts);
+    } else {
+      const filtered = allPosts.filter(post => 
+        post.category?.slug === category
+      );
+      renderPosts(filtered);
+    }
+    
+    // Update active filter button
+    filterButtons.forEach(btn => {
+      if (btn.dataset.filter === category) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+  
+  // Fetch posts from Supabase
+  async function fetchPosts() {
+    showLoading();
+    
+    try {
+      // Check if journalService is available
+      if (typeof journalService === 'undefined') {
+        console.error('Journal service not loaded');
+        showEmpty();
+        return;
+      }
+      
+      const { data, error } = await journalService.getPosts({
+        limit: 12
+      });
+      
+      if (error) {
+        console.error('Error fetching posts:', error);
+        showEmpty();
+        return;
+      }
+      
+      allPosts = data || [];
+      renderPosts(allPosts);
+      
+    } catch (error) {
+      console.error('Exception fetching posts:', error);
+      showEmpty();
+    }
+  }
+  
+  // Initialize filter buttons
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      filterPosts(filter);
+    });
+  });
+  
+  // Fetch posts on page load
+  await fetchPosts();
+  
+})();
+</script>
+
 
 <script>
 /* ════════════════════════════════════════════════════════
