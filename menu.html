@@ -617,6 +617,8 @@
     .product-img-wrap { width: 100%; aspect-ratio: 1; overflow: hidden; margin-bottom: 20px; border-radius: 4px; }
     .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
     .product-card:hover .product-img-wrap img { transform: scale(1.08); }
+    .product-img-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, rgba(107,17,38,.06), rgba(201,151,58,.1)); }
+    .product-desc { font-size: 13px; color: var(--text-lt); margin: 0 0 10px; line-height: 1.5; }
     .product-name {
       font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400;
       color: var(--primary); margin-bottom: 10px;
@@ -1636,45 +1638,59 @@ setTimeout(()=>{
     showMenuLanding();
   }
 
-  // Mock Products Data
-  const products = {
-    events: [
-      { id: 'e1', name: 'Macaron Tower', image: 'events1.jpeg' },
-      { id: 'e2', name: 'Wedding Dessert Table', image: 'events2.jpeg' },
-      { id: 'e3', name: 'Custom Artisan Cupcakes', image: 'cupcake.png' },
-      { id: 'e4', name: 'Luxury Dessert Bar', image: 'events3.jpeg' },
-      { id: 'e5', name: 'Signature Cookie Platters', image: 'cookie.png' },
-      { id: 'e6', name: 'Elegant Pudding Cups', image: 'cup.png' }
-    ],
-    small: [
-      { id: 's1', name: 'Signature Chocolate Chip Cookie', image: 'cookie.png', price: 150 },
-      { id: 's2', name: 'Mango Pudding Cup', image: 'mango.png', price: 250 },
-      { id: 's3', name: 'Jamun Delight', image: 'jamun.png', price: 300 },
-      { id: 's4', name: 'Red Velvet Cupcake', image: 'cupcake.png', price: 180 },
-      { id: 's5', name: 'Classic Pudding Cup', image: 'cup.png', price: 220 },
-      { id: 's6', name: 'Premium Chocolate Cupcake', image: 'cupcake.png', price: 200 }
-    ]
-  };
+  // ── Live products from Supabase ──────────────────────────────────────────
+  // products[type] is populated after fetch; used by addToCart below
+  const products = { events: [], small: [] };
 
-  // Render Products
   function renderProducts(type, container, data) {
-    container.innerHTML = data.map(item => `
-      <div class="product-card">
-        <div class="product-img-wrap"><img src="${item.image}" alt="${item.name}"></div>
-        <h4 class="product-name">${item.name}</h4>
-        ${type === 'small' ? `<p class="product-price">₹${item.price}</p>` : ''}
-        <div class="qty-wrap">
-          <button class="qty-btn" onclick="modifyQty('${item.id}', -1)">-</button>
-          <input type="number" id="qty-${item.id}" class="qty-input" value="1" min="1" readonly>
-          <button class="qty-btn" onclick="modifyQty('${item.id}', 1)">+</button>
-        </div>
-        <button class="add-to-cart-btn" onclick="addToCart('${item.id}', '${type}')">Add to Cart</button>
-      </div>
-    `).join('');
+    if (!data || data.length === 0) {
+      container.innerHTML = `<div style="padding:40px;text-align:center;color:#5a3a3a;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;">
+        No ${type === 'events' ? 'events' : 'products'} yet. Check back soon.
+      </div>`;
+      return;
+    }
+    container.innerHTML = data.map(item => {
+      const img = item.image_url || '';
+      return `
+        <div class="product-card">
+          <div class="product-img-wrap">
+            ${img
+              ? `<img src="${img}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=product-img-placeholder></div>'">`
+              : '<div class="product-img-placeholder"></div>'}
+          </div>
+          <h4 class="product-name">${item.name}</h4>
+          ${item.description ? `<p class="product-desc">${item.description}</p>` : ''}
+          ${type === 'small' && item.price ? `<p class="product-price">₹${parseFloat(item.price).toFixed(2)}</p>` : (type === 'small' ? '<p class="product-price">Price on request</p>' : '')}
+          <div class="qty-wrap">
+            <button class="qty-btn" onclick="modifyQty('${item.id}',-1)">-</button>
+            <input type="number" id="qty-${item.id}" class="qty-input" value="1" min="1" readonly>
+            <button class="qty-btn" onclick="modifyQty('${item.id}',1)">+</button>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart('${item.id}','${type}')">Add to Cart</button>
+        </div>`;
+    }).join('');
   }
 
-  renderProducts('events', gridEvents, products.events);
-  renderProducts('small', gridSmall, products.small);
+  function showLoading(container) {
+    container.innerHTML = `<div style="padding:40px;text-align:center;color:#5a3a3a;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;letter-spacing:1px;">Loading…</div>`;
+  }
+
+  // Fetch from Supabase then render
+  showLoading(gridEvents);
+  showLoading(gridSmall);
+
+  supabaseReady.then(async () => {
+    const [eventsResult, smallResult] = await Promise.all([
+      productsService.getProductsByCategory('events'),
+      productsService.getProductsByCategory('small')
+    ]);
+
+    products.events = eventsResult.data || [];
+    products.small  = smallResult.data  || [];
+
+    renderProducts('events', gridEvents, products.events);
+    renderProducts('small',  gridSmall,  products.small);
+  });
 
   // Global functions for inline handlers
   window.modifyQty = function(id, delta) {
@@ -1710,7 +1726,7 @@ setTimeout(()=>{
       let newItem = {
         id: product.id,
         name: product.name,
-        image: product.image,
+        image: product.image_url || product.image || '',
         quantity: qty,
         type: type
       };

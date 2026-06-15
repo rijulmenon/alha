@@ -781,6 +781,9 @@
       flex-shrink: 0;
       background: rgba(107,17,38,.06);
     }
+    .journal-card-img--empty {
+      background: linear-gradient(135deg, rgba(107,17,38,.06), rgba(201,151,58,.08));
+    }
     .journal-card-img img {
       width: 100%; height: 100%;
       object-fit: cover;
@@ -996,9 +999,6 @@
       }
     }
 
-  <!-- BLOG & CONTACT sections moved below, after #menu -->
-
- 
     /* ═══════════════════════════ FOOTER ═══ */
     footer { 
       background: #0a0a0a !important;
@@ -2832,134 +2832,12 @@
       </div>
     </div>
     <div class="events-content">
-      <div class="blog-filters">
-        <button class="blog-filter-btn active" data-filter="all">All Posts</button>
-        <button class="blog-filter-btn" data-filter="weddings">Weddings</button>
-        <button class="blog-filter-btn" data-filter="corporate">Corporate</button>
-        <button class="blog-filter-btn" data-filter="seasonal">Seasonal</button>
-        <button class="blog-filter-btn" data-filter="recipes">Behind the Scenes</button>
-      </div>
-      <!-- Featured post -->
-      <article class="blog-featured reveal-blog">
-        <div class="blog-featured-img-wrap">
-          <img class="blog-featured-img" src="events1.jpeg" alt="Grand Wedding Reception">
-          <span class="blog-featured-tag">Featured</span>
-        </div>
-        <div class="blog-featured-body">
-          <div class="blog-card-meta">
-            <span class="blog-card-date">June 2026</span>
-            <span class="blog-card-meta-dot"></span>
-            <span class="blog-card-read">8 min read</span>
-          </div>
-          <h2 class="blog-featured-title">A Grand Wedding Reception at the Ritz — How We Fed 800 Guests in Elegant Style</h2>
-          <p class="blog-featured-excerpt">When the Al-Rashidi family commissioned ALHA for their daughter's wedding, we knew this would be a defining moment. Six tiers of saffron-infused choux, 1200 gold-dusted macarons, and a dessert table that stretched twelve metres…</p>
-          <a href="#" class="blog-card-link">Read the full story <span class="blog-card-link-arrow">→</span></a>
-        </div>
-      </article>
-      <!-- Blog grid -->
-      <div class="blog-grid">
-        <article class="blog-card" data-category="weddings">
-          <div class="blog-card-img-wrap">
-            <img class="blog-card-img" src="events2.jpeg" alt="Intimate Garden Celebration">
-            <div class="blog-card-img-overlay"></div>
-            <span class="blog-card-cat">Weddings</span>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="blog-card-date">May 2026</span>
-              <span class="blog-card-meta-dot"></span>
-              <span class="blog-card-read">5 min read</span>
-            </div>
-            <h3 class="blog-card-title">An Intimate Garden Wedding: Pastel Mille-Feuille &amp; Lavender Eclairs</h3>
-            <p class="blog-card-excerpt">Forty guests, a canopy of fairy lights, and a dessert table that looked like a Monet painting come to life. Here's how we brought softness and warmth to this intimate Jumeirah celebration.</p>
-            <a href="#" class="blog-card-link">Read more <span class="blog-card-link-arrow">→</span></a>
-          </div>
-        </article>
-        <article class="blog-card" data-category="corporate">
-          <div class="blog-card-img-wrap">
-            <img class="blog-card-img" src="events3.jpeg" alt="Corporate Gala">
-            <div class="blog-card-img-overlay"></div>
-            <span class="blog-card-cat">Corporate</span>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="blog-card-date">April 2026</span>
-              <span class="blog-card-meta-dot"></span>
-              <span class="blog-card-read">4 min read</span>
-            </div>
-            <h3 class="blog-card-title">Corporate Gala Night: Branding Your Dessert Table for Maximum Impact</h3>
-            <p class="blog-card-excerpt">For a luxury automotive launch in Downtown Dubai, we created edible logos, monochrome chocolate sculptures, and branded packaging that doubled as keepsakes.</p>
-            <a href="#" class="blog-card-link">Read more <span class="blog-card-link-arrow">→</span></a>
-          </div>
-        </article>
-        <article class="blog-card" data-category="seasonal">
-          <div class="blog-card-img-wrap">
-            <img class="blog-card-img" src="events1.jpeg" alt="Ramadan Special">
-            <div class="blog-card-img-overlay"></div>
-            <span class="blog-card-cat">Seasonal</span>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="blog-card-date">March 2026</span>
-              <span class="blog-card-meta-dot"></span>
-              <span class="blog-card-read">6 min read</span>
-            </div>
-            <h3 class="blog-card-title">Ramadan Iftar Hampers: Dates, Kunafa &amp; the Art of Giving</h3>
-            <p class="blog-card-excerpt">Our most beloved seasonal offering. Each hamper is a journey through tradition — Medjool dates enrobed in 72% dark chocolate, rose-water kunafa bites, and hand-written notes.</p>
-            <a href="#" class="blog-card-link">Read more <span class="blog-card-link-arrow">→</span></a>
-          </div>
-        </article>
-        <article class="blog-card" data-category="recipes">
-          <div class="blog-card-img-wrap">
-            <img class="blog-card-img" src="events2.jpeg" alt="Kitchen Stories">
-            <div class="blog-card-img-overlay"></div>
-            <span class="blog-card-cat">Behind the Scenes</span>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="blog-card-date">February 2026</span>
-              <span class="blog-card-meta-dot"></span>
-              <span class="blog-card-read">7 min read</span>
-            </div>
-            <h3 class="blog-card-title">5 AM in the Kitchen: A Day in the Life of Our Pastry Team</h3>
-            <p class="blog-card-excerpt">Before the city wakes, our kitchen is already alive. Follow our head pastry chef through the rituals, the precision, and the quiet magic of early mornings that make ALHA what it is.</p>
-            <a href="#" class="blog-card-link">Read more <span class="blog-card-link-arrow">→</span></a>
-          </div>
-        </article>
-        <article class="blog-card" data-category="weddings">
-          <div class="blog-card-img-wrap">
-            <img class="blog-card-img" src="events3.jpeg" alt="Engagement Party">
-            <div class="blog-card-img-overlay"></div>
-            <span class="blog-card-cat">Weddings</span>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="blog-card-date">January 2026</span>
-              <span class="blog-card-meta-dot"></span>
-              <span class="blog-card-read">4 min read</span>
-            </div>
-            <h3 class="blog-card-title">A Golden Engagement Party: Champagne Truffles &amp; Custom Cake Towers</h3>
-            <p class="blog-card-excerpt">The brief was "opulent, intimate, unforgettable." We built a four-tier croquembouche dusted with edible gold, surrounded by towers of champagne ganache truffles.</p>
-            <a href="#" class="blog-card-link">Read more <span class="blog-card-link-arrow">→</span></a>
-          </div>
-        </article>
-        <article class="blog-card" data-category="seasonal">
-          <div class="blog-card-img-wrap">
-            <img class="blog-card-img" src="events1.jpeg" alt="Eid Celebrations">
-            <div class="blog-card-img-overlay"></div>
-            <span class="blog-card-cat">Seasonal</span>
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="blog-card-date">December 2025</span>
-              <span class="blog-card-meta-dot"></span>
-              <span class="blog-card-read">5 min read</span>
-            </div>
-            <h3 class="blog-card-title">Eid Al-Adha: Crafting 3,000 Maamoul for a Single Family Celebration</h3>
-            <p class="blog-card-excerpt">Tradition meets luxury. Our team spent four days hand-moulding rosewater maamoul filled with premium pistachio paste — a feat of craft and community that we'll never forget.</p>
-            <a href="#" class="blog-card-link">Read more <span class="blog-card-link-arrow">→</span></a>
-          </div>
-        </article>
+      <!-- Dynamic grid loaded from Supabase -->
+      <div id="events-journal-grid" class="blog-grid" style="min-height:200px;">
+        <!-- skeleton -->
+        <div class="blog-card-skeleton"></div>
+        <div class="blog-card-skeleton"></div>
+        <div class="blog-card-skeleton"></div>
       </div>
     </div>
   </div><!-- /#view-events -->
@@ -3245,21 +3123,6 @@
    JOURNAL INTEGRATION WITH SUPABASE
 ════════════════════════════════════════════════════════ */
 (function() {
-  // Helper: wait for supabaseClient to be ready
-  function waitForSupabase() {
-    return new Promise(resolve => {
-      const check = () => {
-        if (typeof supabaseClient !== 'undefined' && supabaseClient !== null &&
-            typeof supabaseClient.from === 'function') {
-          resolve();
-        } else {
-          setTimeout(check, 100);
-        }
-      };
-      check();
-    });
-  }
-
   const grid     = document.getElementById('journal-grid');
   const skeleton = document.getElementById('journal-skeleton');
   const empty    = document.getElementById('journal-empty');
@@ -3278,14 +3141,12 @@
   function makeCard(p) {
     const cat  = p.category?.name || 'Journal';
     const catS = p.category?.slug || '';
-    const img  = p.featured_image_url || 'events1.jpeg';
+    const img  = p.featured_image_url || null;
     const rt   = p.read_time_minutes || 5;
     const date = fmt(p.published_at || p.created_at);
     return `
       <article class="journal-card" data-cat="${catS}">
-        <div class="journal-card-img">
-          <img src="${img}" alt="${p.title}" loading="lazy">
-        </div>
+        ${img ? `<div class="journal-card-img"><img src="${img}" alt="${p.title}" loading="lazy"></div>` : '<div class="journal-card-img journal-card-img--empty"></div>'}
         <div class="journal-card-body">
           <span class="journal-card-cat">${cat}</span>
           <h3 class="journal-card-title">${p.title}</h3>
@@ -3315,8 +3176,8 @@
     });
   });
 
-  // Fetch and display
-  waitForSupabase().then(async () => {
+  // Fetch and display journal posts (main #blog section)
+  supabaseReady.then(async () => {
     try {
       const { data, error } = await supabaseClient
         .from('journal_posts')
@@ -3332,6 +3193,51 @@
       console.log('Journal: loaded', allPosts.length, 'posts');
       render(allPosts);
     } catch(e) { console.error('Journal exception:', e); showEmpty(); }
+  });
+
+  // Also load the #view-events SPA grid with the same posts
+  supabaseReady.then(async () => {
+    const eventsGrid = document.getElementById('events-journal-grid');
+    if (!eventsGrid) return;
+    try {
+      const { data, error } = await supabaseClient
+        .from('journal_posts')
+        .select(`id, title, slug, excerpt, featured_image_url,
+                 read_time_minutes, published_at, created_at,
+                 journal_categories ( id, name, slug )`)
+        .eq('is_published', true)
+        .order('published_at', { ascending: false })
+        .limit(12);
+
+      if (error || !data || data.length === 0) {
+        eventsGrid.innerHTML = '<p style="padding:40px;text-align:center;color:var(--text-lt);font-family:\'Cormorant Garamond\',serif;font-size:20px;font-weight:300;">No posts yet. Check back soon.</p>';
+        return;
+      }
+
+      eventsGrid.innerHTML = data.map(p => {
+        const cat  = p.journal_categories?.name || 'Journal';
+        const img  = p.featured_image_url || null;
+        const date = new Date(p.published_at || p.created_at).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+        const rt   = p.read_time_minutes || 5;
+        return `
+          <article class="blog-card">
+            <div class="blog-card-img-wrap" style="height:220px;overflow:hidden;background:rgba(107,17,38,.06);">
+              ${img ? `<img class="blog-card-img" src="${img}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;">` : ''}
+              <div class="blog-card-img-overlay"></div>
+              <span class="blog-card-cat">${cat}</span>
+            </div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-card-date">${date}</span>
+                <span class="blog-card-meta-dot"></span>
+                <span class="blog-card-read">${rt} min read</span>
+              </div>
+              <h3 class="blog-card-title">${p.title}</h3>
+              <p class="blog-card-excerpt">${p.excerpt || ''}</p>
+            </div>
+          </article>`;
+      }).join('');
+    } catch(e) { console.error('Events journal load error:', e); }
   });
 })();
 </script>
@@ -3780,36 +3686,8 @@ setTimeout(()=>{
   }
   
   window.addToCart = function(id, type) {
-    const list = products[type];
-    const product = list.find(p => p.id === id);
-    const qty = parseInt(document.getElementById(`qty-${id}`).value);
-    
-    const existingIdx = cart.findIndex(item => item.id === id);
-    if(existingIdx >= 0) {
-      cart[existingIdx].quantity += qty;
-      if (type === 'small') {
-         cart[existingIdx].subtotal = cart[existingIdx].quantity * product.price;
-      }
-    } else {
-      let newItem = {
-        id: product.id,
-        name: product.name,
-        image: product.image,
-        quantity: qty,
-        type: type
-      };
-      if(type === 'small') {
-        newItem.price = product.price;
-        newItem.subtotal = qty * product.price;
-      }
-      cart.push(newItem);
-    }
-    
-    localStorage.setItem('alha_cart', JSON.stringify(cart));
-    updateCartBadge();
-    
-    // Reset qty
-    document.getElementById(`qty-${id}`).value = 1;
+    // Products are managed on menu.html — redirect there
+    window.location.href = 'menu.html?category=' + type;
   };
 
   updateCartBadge(); // Init
