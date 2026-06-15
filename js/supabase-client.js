@@ -45,6 +45,10 @@ const loadEnvConfig = async () => {
 // Initialize Supabase client
 let supabaseClient = null;
 
+// Promise that resolves when supabaseClient is ready — import scripts can await this
+let _supabaseReady;
+const supabaseReady = new Promise(resolve => { _supabaseReady = resolve; });
+
 (async function initSupabase() {
   // Load environment configuration
   const envConfig = await loadEnvConfig();
@@ -71,6 +75,7 @@ let supabaseClient = null;
     
     // Create a mock client that logs warnings
     supabaseClient = createMockClient();
+    _supabaseReady();
     return;
   }
   
@@ -85,6 +90,7 @@ let supabaseClient = null;
     });
     
     console.log('✅ Supabase client initialized successfully');
+    _supabaseReady(); // signal all waiters
     
     // Test connection
     const { data, error } = await supabaseClient.from('journal_posts').select('count', { count: 'exact', head: true });
@@ -97,6 +103,7 @@ let supabaseClient = null;
   } catch (error) {
     console.error('❌ Failed to initialize Supabase client:', error);
     supabaseClient = createMockClient();
+    _supabaseReady();
   }
 })();
 
