@@ -69,7 +69,7 @@ class ProductsService {
 
     formatPrice(price) {
         if (price === null || price === undefined) return 'Price on request';
-        return `₹${parseFloat(price).toFixed(2)}`;
+        return `AED ${parseFloat(price).toFixed(2)}`;
     }
 
     hasPrice(product) {

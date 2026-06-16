@@ -171,12 +171,12 @@ class AdminService {
 
     formatDate(dateString) {
         if (!dateString) return 'N/A';
-        return new Date(dateString).toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+        return new Date(dateString).toLocaleDateString('en-AE', { year: 'numeric', month: 'short', day: 'numeric' });
     }
 
     formatPrice(price) {
         if (price === null || price === undefined) return 'Price on request';
-        return `₹${parseFloat(price).toFixed(2)}`;
+        return `AED ${parseFloat(price).toFixed(2)}`;
     }
 
     validateProductData(pd) {

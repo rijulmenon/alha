@@ -247,7 +247,7 @@ function showProductForm(category, product = null) {
                 <input type="text" id="productName" name="name" value="${product?.name || ''}" required>
             </div>
             <div class="form-group">
-                <label>Price (₹) <small>— leave blank for "Price on request"</small></label>
+                <label>Price (AED) <small>— leave blank for "Price on request"</small></label>
                 <input type="number" id="productPrice" name="price" step="0.01" min="0" value="${product?.price ?? ''}">
             </div>
             <div class="form-group">

@@ -908,7 +908,7 @@
     <div class="cart-footer" id="cart-footer" style="display: none;">
       <div class="cart-total">
         <span class="cart-total-label">Total</span>
-        <span class="cart-total-value" id="cart-total-value">₹0</span>
+        <span class="cart-total-value" id="cart-total-value">AED 0</span>
       </div>
       <button class="cart-checkout-btn" onclick="alert('Checkout functionality coming soon!')">
         Proceed to Checkout
@@ -1660,7 +1660,7 @@ setTimeout(()=>{
           </div>
           <h4 class="product-name">${item.name}</h4>
           ${item.description ? `<p class="product-desc">${item.description}</p>` : ''}
-          ${type === 'small' && item.price ? `<p class="product-price">₹${parseFloat(item.price).toFixed(2)}</p>` : (type === 'small' ? '<p class="product-price">Price on request</p>' : '')}
+          ${type === 'small' && item.price ? `<p class="product-price">AED ${parseFloat(item.price).toFixed(2)}</p>` : (type === 'small' ? '<p class="product-price">Price on request</p>' : '')}
           <div class="qty-wrap">
             <button class="qty-btn" onclick="modifyQty('${item.id}',-1)">-</button>
             <input type="number" id="qty-${item.id}" class="qty-input" value="1" min="1" readonly>
@@ -1780,10 +1780,10 @@ setTimeout(()=>{
         <img src="${item.image}" alt="${item.name}" class="cart-item-img">
         <div class="cart-item-details">
           <div class="cart-item-name">${item.name}</div>
-          ${item.price ? `<div class="cart-item-price">₹${item.price} each</div>` : '<div class="cart-item-price">Price on request</div>'}
+          ${item.price ? `<div class="cart-item-price">AED ${item.price} each</div>` : '<div class="cart-item-price">Price on request</div>'}
           <div class="cart-item-qty">
             Qty: ${item.quantity}
-            ${item.subtotal ? ` • ₹${item.subtotal}` : ''}
+            ${item.subtotal ? ` • AED ${item.subtotal}` : ''}
           </div>
         </div>
         <button class="cart-item-remove" onclick="removeFromCart(${index})" aria-label="Remove item">×</button>
@@ -1792,7 +1792,7 @@ setTimeout(()=>{
     
     // Calculate total (only for small quantity items with prices)
     const total = cart.reduce((sum, item) => sum + (item.subtotal || 0), 0);
-    cartTotalValue.textContent = total > 0 ? `₹${total}` : 'Price on request';
+    cartTotalValue.textContent = total > 0 ? `AED ${total.toFixed(2)}` : 'Price on request';
     cartFooter.style.display = 'block';
   }
   
