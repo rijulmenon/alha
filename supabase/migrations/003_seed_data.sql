@@ -172,7 +172,7 @@ INSERT INTO products (name, description, category, price, image_url, is_availabl
     ('Croquembouche Tower', 'Classic French tower of choux pastry with caramel', 'events', NULL, 'events3.jpeg', true),
     ('Custom Cake (Multi-tier)', 'Bespoke multi-tier celebration cake', 'events', NULL, 'events1.jpeg', true),
     
-    -- Small Quantity Orders (with prices)
+    -- Single Orders (with prices)
     ('Assorted Macarons Box (12)', 'Box of 12 French macarons in assorted flavors', 'small', 180.00, 'cookie.png', true),
     ('Gulab Jamun (6 pieces)', 'Traditional Indian sweet in rose syrup', 'small', 120.00, 'jamun.png', true),
     ('Mango Mousse Cup', 'Light mango mousse with fresh fruit', 'small', 85.00, 'mango.png', true),

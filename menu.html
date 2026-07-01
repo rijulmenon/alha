@@ -31,27 +31,15 @@
       font-family: 'Jost', sans-serif;
       color: var(--text);
       overflow-x: hidden;
-      cursor: none;
     }
- 
-    /* ═══════════════════════════ CURSOR ═══ */
-    #cursor {
-      position: fixed; z-index: 99999;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--gold); pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: width .3s, height .3s;
-      mix-blend-mode: multiply;
+    
+    /* ═══════════════════════════ NATIVE CURSOR RESET ═══ */
+    * {
+      cursor: auto !important;
     }
-    #cursor-ring {
-      position: fixed; z-index: 99998;
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid rgba(201,151,58,.5); pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: width .3s, height .3s, border-color .3s;
+    a, button, select, input[type="submit"], .category-card, .product-card, .nav-cart, .menu-nav-back, .menu-nav-home, .menu-nav-brand {
+      cursor: pointer !important;
     }
-    body:has(a:hover) #cursor, body:has(button:hover) #cursor { width:16px;height:16px;background:var(--primary); }
-    body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width:52px;height:52px;border-color:rgba(107,17,38,.4); }
  
     /* ═══════════════════════════ LOADER ═══ */
     #loading-screen {
@@ -523,8 +511,6 @@
  
     /* ═══════════════════════════ RESPONSIVE ═══ */
     @media (max-width:768px) {
-      body { cursor:auto; }
-      #cursor,#cursor-ring { display:none; }
       .story-section.left-image,.story-section.right-image { flex-direction:column;align-items:flex-start;padding-left:clamp(22px,5vw,40px);padding-right:clamp(22px,5vw,40px); }
       .section-image-wrap { flex:none;max-width:100%;width:100%;margin-bottom:36px; }
       .section-image-wrap::before { display:none; }
@@ -750,9 +736,6 @@
 </head>
 <body>
  
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
- 
 <!-- ──────────── LOADING SCREEN ──────────── -->
 <div id="loading-screen" role="status" aria-label="Loading ALHA">
   <div class="loader-corners"></div>
@@ -938,8 +921,8 @@
         <h3>Events (Bulk Orders)</h3>
       </div>
       <div class="category-card" data-category="small">
-        <img src="events3.jpeg" alt="Small Quantity Category">
-        <h3>Small Quantity Orders</h3>
+        <img src="events3.jpeg" alt="Single Orders Category">
+        <h3>Single Orders</h3>
       </div>
     </div>
 
@@ -993,25 +976,12 @@
 <script src="js/orders-service.js"></script>
 <script src="js/journal-service.js"></script>
 
+<!-- Global Cart Badge Sync -->
+<script src="js/cart-badge-sync.js"></script>
+
 <script>
 /* ════════════════════════════════════════════════════════
-   1. CUSTOM CURSOR
-════════════════════════════════════════════════════════ */
-(function() {
-  const c = document.getElementById('cursor');
-  const r = document.getElementById('cursor-ring');
-  let mx=-100,my=-100,rx=-100,ry=-100;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-  (function loop(){
-    c.style.left=mx+'px'; c.style.top=my+'px';
-    rx+=(mx-rx)*.13; ry+=(my-ry)*.13;
-    r.style.left=rx+'px'; r.style.top=ry+'px';
-    requestAnimationFrame(loop);
-  })();
-})();
- 
-/* ════════════════════════════════════════════════════════
-   2. LOADER 3D WIREFRAME SPHERE (Three.js)
+   1. LOADER 3D WIREFRAME SPHERE (Three.js)
 ════════════════════════════════════════════════════════ */
 (function() {
   const canvas = document.getElementById('loader-3d');
@@ -1620,7 +1590,7 @@ setTimeout(()=>{
     } else {
       sectionSmall.style.display = 'block';
       sectionEvents.style.display = 'none';
-      menuMainTitle.textContent = 'Small Quantity Orders';
+      menuMainTitle.textContent = 'Single Orders';
     }
   }
 
@@ -1703,15 +1673,14 @@ setTimeout(()=>{
     input.value = val;
   };
 
-  // Cart logic
+  // Cart logic - Use global sync
   let cart = JSON.parse(localStorage.getItem('alha_cart')) || [];
   
+  // Remove old updateCartBadge - now handled by cart-badge-sync.js
   function updateCartBadge() {
-    const badge = document.getElementById('cart-badge');
-    if(!badge) return;
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    badge.textContent = totalItems;
-    badge.style.display = totalItems > 0 ? 'flex' : 'none';
+    if (window.updateGlobalCartBadge) {
+      window.updateGlobalCartBadge();
+    }
   }
   
   window.addToCart = function(id, type) {
