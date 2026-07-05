@@ -3218,19 +3218,6 @@
       body { padding-bottom: 0; }
     }
     
-    /* ═══════════════════════════════════════════════════════
-       EMERGENCY OVERRIDE - FORCE HIDE LOADING SCREEN
-    ═══════════════════════════════════════════════════════ */
-    #loading-screen, .loader-wrapper { 
-      display: none !important; 
-      opacity: 0 !important; 
-      pointer-events: none !important; 
-    }
-    #main-site {
-      opacity: 1 !important;
-      visibility: visible !important;
-    }
-    
     /* Add top padding to prevent overlap with fixed nav */
     body {
       padding-top: 80px;
@@ -3245,7 +3232,7 @@
   
   <div class="nav-center">
     <a href="#home" class="nav-link" data-section="home">HOME</a>
-    <a href="#menu" class="nav-link" data-section="menu">MENU</a>
+    <a href="#menu-categories-section" class="nav-link" data-section="menu-categories-section">MENU</a>
     <a href="#blog" class="nav-link" data-section="blog">BLOG</a>
     <a href="#contact" class="nav-link" data-section="contact">CONTACT</a>
   </div>
@@ -3565,8 +3552,8 @@
     <section id="quote-interlude" aria-label="Our philosophy">
       <canvas id="quote-canvas" aria-hidden="true"></canvas>
       <div>
-        <p class="quote-text reveal-quote">"Food is not just eating energy. It's an experience."</p>
-        <p class="quote-attr reveal-quote" style="transition-delay:.2s;">— ALHA</p>
+        <p class="quote-text reveal-quote">"We don't just make desserts — we craft the sweetest chapters of your story."</p>
+        <p class="quote-attr reveal-quote" style="transition-delay:.2s;">— The ALHA Philosophy</p>
       </div>
     </section>
 
@@ -4673,10 +4660,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Section mapping for active state detection
   const sectionMap = {
-    home:    document.getElementById('home'),
-    menu:    document.getElementById('menu'),
-    blog:    document.getElementById('blog'),
-    contact: document.getElementById('contact'),
+    home:                    document.getElementById('home'),
+    'menu-categories-section': document.getElementById('menu-categories-section'),
+    blog:                    document.getElementById('blog'),
+    contact:                 document.getElementById('contact'),
   };
 
   // Set active link based on section ID
@@ -4898,6 +4885,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateBanner();
   startAutoplay();
 })();
+</script>
 
 <!-- ══════════════════════════ BLOG MODAL POPUP ══════════════════════════ -->
 <div id="blog-modal">
@@ -5031,8 +5019,6 @@ document.addEventListener('keydown', function(e) {
 });
 
 console.log('Modal script loaded successfully - using safe delegation');
-</script>
-
 </script>
 
 
