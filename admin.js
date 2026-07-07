@@ -185,14 +185,13 @@ async function loadJournal() {
 
 function journalCard(post) {
     const img = post.featured_image_url || '';
-    const cat = post.category?.name || 'Uncategorized';
     return `
         <div class="item-card" data-id="${post.id}">
             ${img ? `<img src="${img}" alt="${post.title}" class="item-image" onerror="this.style.display='none'">` : '<div class="item-image-placeholder">No image</div>'}
             <div class="item-content">
                 <h3 class="item-title">${post.title}</h3>
                 <div class="item-meta">
-                    <span class="item-tag">${cat}</span>
+                    <span class="item-tag">Recipe</span>
                     <span class="item-tag">${post.read_time_minutes} min read</span>
                     <span class="item-tag">${post.is_published ? '✓ Published' : '✗ Draft'}</span>
                 </div>
@@ -327,24 +326,11 @@ async function deleteProduct(productId, category) {
 async function showJournalForm(post = null) {
     const isEdit = !!post;
 
-    // Load categories for dropdown
-    const { data: cats } = await adminService.getJournalCategories();
-    const catOptions = (cats || []).map(c =>
-        `<option value="${c.id}" ${post?.journal_categories?.id === c.id ? 'selected' : ''}>${c.name}</option>`
-    ).join('');
-
-    openModal(isEdit ? 'Edit Journal Entry' : 'Add Journal Entry', `
+    openModal(isEdit ? 'Edit Recipe' : 'Add Recipe', `
         <form id="journalForm" onsubmit="handleJournalSubmit(event,${isEdit})">
             <div class="form-group">
                 <label>Title *</label>
                 <input type="text" id="journalTitle" name="title" value="${post?.title || ''}" required>
-            </div>
-            <div class="form-group">
-                <label>Category</label>
-                <select id="journalCategory" name="category_id">
-                    <option value="">— No category —</option>
-                    ${catOptions}
-                </select>
             </div>
             <div class="form-group">
                 <label>Excerpt</label>
@@ -391,8 +377,7 @@ async function handleJournalSubmit(event, isEdit) {
         content: fd.get('content'),
         read_time_minutes: parseInt(fd.get('read_time_minutes')),
         is_published: fd.get('is_published') === 'on',
-        published_at: fd.get('published_at') ? new Date(fd.get('published_at')).toISOString() : null,
-        category_id: fd.get('category_id') || null
+        published_at: fd.get('published_at') ? new Date(fd.get('published_at')).toISOString() : null
     };
 
     const v = adminService.validateJournalData(postData);
