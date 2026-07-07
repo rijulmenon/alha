@@ -78,11 +78,10 @@ class AdminService {
                 .from('journal_posts')
                 .select(`id, title, slug, excerpt, content, featured_image_url,
                          author_name, is_featured, is_published, read_time_minutes,
-                         published_at, created_at,
-                         journal_categories ( id, name, slug )`)
+                         published_at, created_at`)
                 .order('created_at', { ascending: false });
             if (error) { console.error('Error fetching journal posts:', error); return { data: [], error }; }
-            return { data: data.map(p => ({ ...p, category: p.journal_categories })), error: null };
+            return { data: data || [], error: null };
         } catch (e) { return { data: [], error: e.message }; }
     }
 
@@ -125,11 +124,8 @@ class AdminService {
     }
 
     async getJournalCategories() {
-        try {
-            const db = await this._db();
-            const { data, error } = await db.from('journal_categories').select('*').order('name');
-            return { data: data || [], error };
-        } catch (e) { return { data: [], error: e.message }; }
+        // Categories removed — journal is recipes only
+        return { data: [], error: null };
     }
 
     // ─── Image Upload (Supabase Storage) ──────────────────────────────────────
