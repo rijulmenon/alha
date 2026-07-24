@@ -209,37 +209,46 @@
     /* ═══════════════════════════ MENU NAV ═══ */
     #menu-nav {
       position: sticky; top: 0; z-index: 200;
-      background: var(--primary);
+      background: #6b1d2f;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 clamp(20px, 4vw, 60px); height: 64px;
-      border-bottom: 1px solid rgba(201,151,58,.25);
+      padding: 0 clamp(20px, 4vw, 60px);
+      height: 80px;
+      border-bottom: 1px solid rgba(201,151,58,.2);
     }
     #menu-nav::after {
       content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, rgba(201,151,58,.5) 30%, rgba(232,192,106,.7) 50%, rgba(201,151,58,.5) 70%, transparent);
     }
 
-    /* Left: back + home */
+    /* Left: back + home — no visible borders, subtle on hover */
     .menu-nav-left {
-      display: flex; align-items: center; gap: 6px; flex: 1;
+      display: flex; align-items: center; gap: 4px; flex: 1;
     }
     .menu-nav-back, .menu-nav-home {
       display: inline-flex; align-items: center; gap: 5px;
       font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 400;
       letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
-      color: rgba(250,246,238,.65); transition: color .2s;
-      padding: 6px 12px; border: 1px solid rgba(201,151,58,.2);
+      color: rgba(250,246,238,.6);
+      padding: 7px 14px;
+      border: 1px solid transparent;
+      transition: color .2s, border-color .2s;
     }
-    .menu-nav-back:hover, .menu-nav-home:hover { color: var(--gold-lt); border-color: rgba(201,151,58,.5); }
-    .menu-nav-back { border-right: none; }
-    .menu-nav-home { border-left: 1px solid rgba(201,151,58,.1); }
+    .menu-nav-back:hover, .menu-nav-home:hover {
+      color: var(--gold-lt);
+      border-color: rgba(201,151,58,.35);
+    }
 
-    /* Centre: ALHA wordmark */
+    /* Centre: ALHA — white default, gold on hover */
     .menu-nav-brand {
-      font-family: 'Cormorant Garamond', serif; font-size: 26px;
-      letter-spacing: 10px; font-weight: 400; color: var(--cream);
-      text-decoration: none; flex: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      letter-spacing: 10px;
+      font-weight: 400;
+      color: #ffffff;
+      text-decoration: none;
+      flex: 0;
       position: absolute; left: 50%; transform: translateX(-50%);
+      transition: color .25s;
     }
     .menu-nav-brand:hover { color: var(--gold-lt); }
 
@@ -247,10 +256,13 @@
     .menu-nav-right { display: flex; align-items: center; flex: 1; justify-content: flex-end; }
     .nav-cart {
       display: flex; align-items: center; cursor: pointer;
-      color: rgba(250,246,238,.7); position: relative; transition: color .2s;
-      padding: 6px;
+      position: relative; padding: 6px;
+      background: #6b1d2f; border: none;
+      transition: transform .25s;
     }
-    .nav-cart:hover { color: var(--gold-lt); }
+    .nav-cart svg { stroke: rgba(250,246,238,.75); transition: stroke .25s; width: 22px; height: 22px; }
+    .nav-cart:hover { transform: translateY(-2px); }
+    .nav-cart:hover svg { stroke: var(--gold-lt); }
     .cart-badge {
       position: absolute; top: -2px; right: -4px;
       width: 16px; height: 16px; border-radius: 50%;
@@ -483,32 +495,170 @@
     .reveal-quote.in-view { opacity:1;transform:translateY(0); }
  
     /* ═══════════════════════════ FOOTER ═══ */
-    footer { background:var(--bg-dark); position:relative; overflow:hidden; }
+    footer { 
+      background: rgba(78, 12, 28, 0.92) !important;
+      background-color: rgba(78, 12, 28, 0.92) !important;
+      position: relative;
+      overflow: hidden;
+      border-top: 2px solid rgba(201,151,58,.3);
+    }
+    
+    /* AGGRESSIVE OVERRIDE - Force all footer elements to visible colors */
+    footer *,
+    footer p,
+    footer span,
+    footer a,
+    footer div {
+      color: #faf6ee !important;
+    }
+    
     footer::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg,transparent,rgba(201,151,58,.4) 30%,rgba(201,151,58,.4) 70%,transparent);
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,151,58,.6) 30%, rgba(201,151,58,.6) 70%, transparent);
     }
+    
+    /* Full width footer */
     .footer-top {
-      padding:clamp(48px,7vh,80px) clamp(32px,6vw,80px) clamp(32px,4vh,48px);
-      display:grid; grid-template-columns:1fr auto 1fr; align-items:start; gap:40px;
+      max-width: 100%;
+      padding: clamp(60px, 8vh, 90px) clamp(40px, 6vw, 80px) clamp(40px, 5vh, 60px);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      gap: 50px;
     }
-    .footer-brand-name { font-family:'Cormorant Garamond',serif;font-size:32px;letter-spacing:10px;font-weight:300;color:var(--cream);display:block;margin-bottom:6px; }
-    .footer-brand-sub  { font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(201,151,58,.45);display:block;margin-bottom:20px; }
-    .footer-about { font-size:13px;font-weight:300;line-height:1.8;color:rgba(250,246,238,.35);max-width:240px; }
-    .footer-centre-col { display:flex;flex-direction:column;align-items:center;gap:16px; }
-    .footer-orn { display:flex;align-items:center;gap:10px; }
-    .footer-orn-line { width:36px;height:1px;background:rgba(201,151,58,.2); }
-    .footer-orn-gem  { width:5px;height:5px;background:rgba(201,151,58,.4);transform:rotate(45deg); }
-    .footer-seal { font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;font-weight:300;color:rgba(201,151,58,.35);letter-spacing:1px;text-align:center;line-height:1.6; }
-    .footer-right-col { display:flex;flex-direction:column;align-items:flex-end;gap:6px; }
-    .footer-links { display:flex;flex-direction:column;align-items:flex-end;gap:10px;margin-bottom:16px; }
-    .footer-links a { font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(250,246,238,.3);text-decoration:none;transition:color .2s; }
-    .footer-links a:hover { color:rgba(201,151,58,.7); }
-    .footer-contact { font-size:12px;font-weight:300;line-height:1.7;color:rgba(250,246,238,.25);text-align:right; }
-    .footer-bottom { border-top:1px solid rgba(255,255,255,.04);padding:18px clamp(32px,6vw,80px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px; }
-    .footer-copy  { font-size:9px;letter-spacing:1.5px;color:rgba(250,246,238,.18); }
-    .footer-craft { font-size:9px;letter-spacing:1px;color:rgba(201,151,58,.25); }
- 
+    
+    /* Brand column */
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      letter-spacing: 10px;
+      font-weight: 400;
+      color: #faf6ee !important;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .footer-brand-sub {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c9973a !important;
+      display: block;
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+    .footer-about {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(250, 246, 238, 0.6) !important;
+      max-width: 280px;
+    }
+    
+    /* Center ornament column */
+    .footer-centre-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .footer-orn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-orn-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(201,151,58,.4) !important;
+    }
+    .footer-orn-gem {
+      width: 6px;
+      height: 6px;
+      background: #c9973a !important;
+      transform: rotate(45deg);
+      opacity: 0.6;
+    }
+    .footer-seal {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(201, 151, 58, 0.5) !important;
+      letter-spacing: 1px;
+      text-align: center;
+      line-height: 1.7;
+    }
+    
+    /* Links column - Horizontal layout */
+    .footer-right-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 24px;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(250, 246, 238, 0.7) !important;
+      text-decoration: none;
+      transition: color .3s ease, border-bottom-color .3s ease;
+      font-weight: 400;
+      padding: 4px 0;
+      border-bottom: 1px solid transparent;
+    }
+    .footer-links a:hover {
+      color: #e8c06a !important;
+      border-bottom-color: #e8c06a !important;
+    }
+    .footer-contact {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(250, 246, 238, 0.5) !important;
+      text-align: right;
+    }
+    
+    /* Bottom bar */
+    .footer-bottom {
+      max-width: 100%;
+      border-top: 1px solid rgba(201,151,58,.15);
+      padding: 24px clamp(40px, 6vw, 80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: rgba(250, 246, 238, 0.35) !important;
+      font-weight: 300;
+    }
+    .footer-craft {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: rgba(201, 151, 58, 0.5) !important;
+      font-weight: 300;
+    }
     /* ═══════════════════════════ RESPONSIVE ═══ */
     @media (max-width:768px) {
       .story-section.left-image,.story-section.right-image { flex-direction:column;align-items:flex-start;padding-left:clamp(22px,5vw,40px);padding-right:clamp(22px,5vw,40px); }
@@ -878,7 +1028,7 @@
       </a>
       <a href="index.html" class="menu-nav-home">Home</a>
     </div>
-    <a href="index.html" class="menu-nav-brand">ALHA</a>
+    <a href="index.html" class="menu-nav-brand">ALHA.AE</a>
     <div class="menu-nav-right">
       <div class="nav-cart" role="button" aria-label="Cart" tabindex="0">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -902,16 +1052,67 @@
         <span class="cart-total-label">Total</span>
         <span class="cart-total-value" id="cart-total-value">AED 0</span>
       </div>
-      <button class="cart-checkout-btn" onclick="alert('Checkout functionality coming soon!')">
+      <button class="cart-checkout-btn" onclick="openOrderReview()">
         Proceed to Checkout
       </button>
     </div>
   </div>
- 
+
+<!-- ──────────── ORDER REVIEW MODAL ──────────── -->
+<div id="order-review-overlay" style="
+  display:none; position:fixed; inset:0; z-index:600;
+  background:rgba(26,15,15,.75); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center;">
+  <div id="order-review-modal" style="
+    background:var(--cream); width:min(540px,92vw); max-height:88vh;
+    overflow-y:auto; border:1px solid rgba(201,151,58,.25);
+    box-shadow:0 24px 64px rgba(0,0,0,.35); display:flex; flex-direction:column;">
+
+    <!-- Header -->
+    <div style="padding:28px 32px 20px; border-bottom:1px solid rgba(201,151,58,.2); display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--primary); margin:0;">Your Order</h2>
+        <p style="font-size:12px; color:var(--text-lt); margin:4px 0 0; letter-spacing:1px;">Review and remove items before confirming</p>
+      </div>
+      <button onclick="closeOrderReview()" style="background:none; border:none; font-size:24px; color:var(--text-lt); cursor:pointer; line-height:1; padding:4px 8px;">&times;</button>
+    </div>
+
+    <!-- Items list -->
+    <div id="review-items" style="padding:20px 32px; flex:1; overflow-y:auto;"></div>
+
+    <!-- Total -->
+    <div style="padding:16px 32px; border-top:1px solid rgba(201,151,58,.15); border-bottom:1px solid rgba(201,151,58,.15); background:rgba(201,151,58,.04);">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--text-lt);">Order Total</span>
+        <span id="review-total" style="font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--primary); font-weight:300;"></span>
+      </div>
+      <p style="font-size:11px; color:var(--text-lt); margin-top:6px; font-style:italic;">* Event items are priced on request and confirmed by our team.</p>
+    </div>
+
+    <!-- Actions -->
+    <div style="padding:24px 32px; display:flex; gap:14px;">
+      <button onclick="closeOrderReview()" style="
+        flex:1; padding:14px; background:transparent;
+        border:1px solid rgba(107,17,38,.25); color:var(--primary);
+        font-size:10px; letter-spacing:2.5px; text-transform:uppercase; cursor:pointer;">
+        Cancel
+      </button>
+      <button onclick="confirmOrderWhatsApp()" style="
+        flex:2; padding:14px; background:var(--primary); color:var(--cream);
+        border:none; font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
+        cursor:pointer; font-family:'Jost',sans-serif; font-weight:500;
+        display:flex; align-items:center; justify-content:center; gap:10px;">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Confirm &amp; Send via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
     <div id="view-menu">
     <div class="menu-header">
       <h2 class="menu-title" id="menu-main-title">Our Offerings</h2>
-      <p class="menu-subtitle">Select a category</p>
+      <p class="menu-subtitle">Select your favourite items</p>
     </div>
 
     <!-- Category Selection -->
@@ -947,7 +1148,7 @@
       <div class="footer-brand-col">
         <span class="footer-brand-name">ALHA</span>
         <span class="footer-brand-sub">Luxury Dessert Catering</span>
-        <p class="footer-about">Crafting extraordinary dessert experiences across Kerala since 2020. Every creation is a labour of love.</p>
+        <p class="footer-about">Crafting extraordinary dessert experiences across the United Arab Emirates since 2026. Every creation is a labour of love.</p>
       </div>
       <div class="footer-centre-col">
         <div class="footer-orn"><div class="footer-orn-line"></div><div class="footer-orn-gem"></div><div class="footer-orn-line"></div></div>
@@ -956,13 +1157,13 @@
       </div>
       <div class="footer-right-col">
         <nav class="footer-links" aria-label="Footer navigation">
-          <a href="index.html#home">Home</a><a href="menu.html">Menu</a><a href="menu.html?category=events">Events</a><a href="index.html#blog">About Us</a><a href="index.html#contact">Contact</a>
+          <a href="index.html#home">Home</a><a href="index.html#menu-categories-section">Menu</a><a href="index.html#blog">Recipies</a><a href="index.html#contact">Contact</a>
         </nav>
-        <p class="footer-contact">Kerala, India<br>hello@alha.in<br>+91 98765 43210</p>
+        <p class="footer-contact">Dubai, United Arab Emirates<br>@al7a_.0<br>+971 56 156 1727</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2024 ALHA. All rights reserved.</p>
+      <p class="footer-copy">© 2026 ALHA. All rights reserved.</p>
       <p class="footer-craft">Handcrafted with Care ✦</p>
     </div>
   </footer>
@@ -1684,6 +1885,9 @@ setTimeout(()=>{
   }
   
   window.addToCart = function(id, type) {
+    // Always re-read from localStorage to avoid stale state after checkout
+    cart = JSON.parse(localStorage.getItem('alha_cart') || '[]');
+
     const list = products[type];
     const product = list.find(p => p.id === id);
     const qty = parseInt(document.getElementById(`qty-${id}`).value);
@@ -1730,6 +1934,7 @@ setTimeout(()=>{
   const cartTotalValue = document.getElementById('cart-total-value');
   
   function openCart() {
+    cart = JSON.parse(localStorage.getItem('alha_cart') || '[]');
     cartOverlay.classList.add('active');
     cartSidebar.classList.add('active');
     renderCart();
@@ -1741,6 +1946,8 @@ setTimeout(()=>{
   }
   
   function renderCart() {
+    // Always read fresh from localStorage so post-checkout state is correct
+    cart = JSON.parse(localStorage.getItem('alha_cart') || '[]');
     if (cart.length === 0) {
       cartItemsList.innerHTML = '<p class="cart-empty">Your cart is empty</p>';
       cartFooter.style.display = 'none';
@@ -1781,6 +1988,109 @@ setTimeout(()=>{
   
   // Initial render
   renderCart();
+})();
+
+/* ══════════════════════════════════════════════════
+   ORDER REVIEW + WHATSAPP CHECKOUT
+══════════════════════════════════════════════════ */
+(function() {
+  const overlay   = document.getElementById('order-review-overlay');
+  const reviewEl  = document.getElementById('review-items');
+  const totalEl   = document.getElementById('review-total');
+
+  // Keep a local reference that stays in sync
+  function getCart() {
+    return JSON.parse(localStorage.getItem('alha_cart') || '[]');
+  }
+
+  function renderReview() {
+    const cart = getCart();
+    if (!cart.length) { closeOrderReview(); return; }
+
+    reviewEl.innerHTML = cart.map((item, i) => `
+      <div id="ritem-${i}" style="
+        display:flex; align-items:center; gap:16px; padding:16px 0;
+        border-bottom:1px solid rgba(201,151,58,.12);">
+        ${item.image
+          ? `<img src="${item.image}" alt="${item.name}" style="width:56px;height:56px;object-fit:cover;border:1px solid rgba(201,151,58,.2);">`
+          : `<div style="width:56px;height:56px;background:rgba(107,17,38,.06);display:flex;align-items:center;justify-content:center;font-size:22px;">🍮</div>`}
+        <div style="flex:1;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--primary);font-weight:400;">${item.name}</div>
+          <div style="font-size:12px;color:var(--text-lt);margin-top:3px;">
+            Qty: ${item.quantity}
+            ${item.price ? ` &nbsp;·&nbsp; AED ${parseFloat(item.price).toFixed(2)} each` : ' &nbsp;·&nbsp; Price on request'}
+          </div>
+          ${item.subtotal ? `<div style="font-size:13px;color:var(--primary);margin-top:2px;font-weight:500;">AED ${parseFloat(item.subtotal).toFixed(2)}</div>` : ''}
+        </div>
+        <button onclick="removeReviewItem(${i})" title="Remove" style="
+          background:none;border:none;cursor:pointer;color:var(--text-lt);
+          font-size:20px;line-height:1;padding:4px;transition:color .2s;"
+          onmouseover="this.style.color='var(--primary)'"
+          onmouseout="this.style.color='var(--text-lt)'">×</button>
+      </div>`).join('');
+
+    const total = cart.reduce((s, i) => s + (i.subtotal || 0), 0);
+    totalEl.textContent = total > 0 ? `AED ${total.toFixed(2)}` : 'Price on request';
+  }
+
+  window.openOrderReview = function() {
+    const cart = getCart();
+    if (!cart.length) { alert('Your cart is empty.'); return; }
+    renderReview();
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeOrderReview = function() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  window.removeReviewItem = function(index) {
+    const cart = getCart();
+    cart.splice(index, 1);
+    localStorage.setItem('alha_cart', JSON.stringify(cart));
+    if (window.updateGlobalCartBadge) window.updateGlobalCartBadge();
+    if (!cart.length) { closeOrderReview(); return; }
+    renderReview();
+  };
+
+  window.confirmOrderWhatsApp = function() {
+    const cart = getCart();
+    if (!cart.length) { alert('Your cart is empty.'); return; }
+
+    const lines = cart.map(item => {
+      const price = item.price
+        ? `AED ${parseFloat(item.price).toFixed(2)} each${item.subtotal ? ` → AED ${parseFloat(item.subtotal).toFixed(2)}` : ''}`
+        : 'Price on request';
+      return `• ${item.name} (x${item.quantity}) — ${price}`;
+    });
+
+    const total = cart.reduce((s, i) => s + (i.subtotal || 0), 0);
+    const totalLine = total > 0 ? `\nTotal: AED ${total.toFixed(2)}` : '\nTotal: Price on request (event items)';
+
+    const msg = `🛒 New Order from ALHA Website\n\n${lines.join('\n')}${totalLine}\n\nPlease confirm availability and pricing.`;
+    const url = `https://wa.me/971561561727?text=${encodeURIComponent(msg)}`;
+
+    window.open(url, '_blank');
+    closeOrderReview();
+
+    // Clear cart and update all UI
+    localStorage.setItem('alha_cart', JSON.stringify([]));
+    cart.length = 0;    if (window.updateGlobalCartBadge) window.updateGlobalCartBadge();
+    // Update the cart sidebar UI immediately
+    const cartItemsList = document.getElementById('cart-items-list');
+    const cartFooter    = document.getElementById('cart-footer');
+    const cartBadge     = document.getElementById('cart-badge');
+    if (cartItemsList) cartItemsList.innerHTML = '<p class="cart-empty">Your cart is empty</p>';
+    if (cartFooter)    cartFooter.style.display = 'none';
+    if (cartBadge)     { cartBadge.textContent = '0'; cartBadge.style.display = 'none'; }
+  };
+
+  // Close on overlay click
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeOrderReview();
+  });
 })();
 </script>
 </body>

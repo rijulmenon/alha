@@ -40,7 +40,7 @@
     * {
       cursor: auto !important;
     }
-    a, button, select, input[type="submit"], .blog-card, .journal-card, .nav-link, .nav-cart, .hero-cta-primary, .hero-cta-secondary, .category-card, .product-card, .banner-dot, .nav-hamburger, .cart-close, .cart-item-remove, .cart-checkout-btn {
+    a, button, select, input[type="submit"], .blog-card, .journal-card, .journal-card *, .nav-link, .nav-cart, .hero-cta-primary, .hero-cta-secondary, .category-card, .product-card, .banner-dot, .nav-hamburger, .cart-close, .cart-item-remove, .cart-checkout-btn {
       cursor: pointer !important;
     }
  
@@ -65,7 +65,7 @@
     /* Brand logo on left */
     .nav-brand {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
+      font-size: 24px !important;
       letter-spacing: 8px;
       font-weight: 400;
       color: #ffffff !important;
@@ -126,32 +126,26 @@
     /* Right side cart button */
     .nav-cart {
       position: relative;
-      width: 40px;
-      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1.5px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
+      background: #6b1d2f;
+      border: none;
       cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
+      padding: 6px;
+      transition: transform 0.25s ease;
     }
     .nav-cart:hover {
-      background: var(--gold);
-      border-color: var(--gold);
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(232, 192, 106, 0.4);
     }
     .nav-cart svg {
-      width: 20px;
-      height: 20px;
-      stroke: #ffffff !important;
-      transition: stroke 0.3s ease;
+      width: 22px;
+      height: 22px;
+      stroke: rgba(255,255,255,0.8);
+      transition: stroke 0.25s ease;
     }
     .nav-cart:hover svg {
-      stroke: #1a0f0f !important;
+      stroke: var(--gold) !important;
     }
     .nav-cart-badge {
       position: absolute;
@@ -599,8 +593,7 @@
       width: 100% !important; height: 100% !important;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.25;
-      mix-blend-mode: multiply;
+      opacity: 0.18;
     }
  
     /* Gold accent stars - physical HTML elements */
@@ -628,7 +621,7 @@
       color: rgba(201, 151, 58, 0.6) !important; 
     }
     .hero-heading {
-      font-family:'Cormorant Garamond',serif; font-size:clamp(42px,8vw,100px);
+      font-family:'Cormorant Garamond',serif; font-size:clamp(48px,7.5vw,105px);
       font-weight:300; line-height:1.02; 
       color: #6b1d2f !important; 
       letter-spacing:-1px; margin-bottom:8px;
@@ -1342,6 +1335,7 @@
     .journal-card {
       background: #fff;
       border: 1px solid rgba(201,151,58,.18);
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -1783,8 +1777,8 @@
 
     /* ═══════════════════════════ FOOTER ═══ */
     footer { 
-      background: #0a0a0a !important;
-      background-color: #0a0a0a !important;
+      background: rgba(78, 12, 28, 0.92) !important;
+      background-color: rgba(78, 12, 28, 0.92) !important;
       position: relative;
       overflow: hidden;
       border-top: 2px solid rgba(201,151,58,.3);
@@ -3135,18 +3129,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: var(--primary);
-      border-radius: 50%;
-      text-decoration: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 12px rgba(107, 17, 38, 0.2);
+      background: #6b1d2f;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      cursor: pointer;
+      padding: 6px;
+      transition: transform 0.25s ease;
     }
     
     .nav-cart:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(107, 17, 38, 0.3);
+      box-shadow: none;
     }
     
     .nav-cart-icon {
@@ -3237,7 +3231,7 @@
  
 <!-- ──────────── TOP NAVIGATION BAR ──────────── -->
 <nav id="top-nav" role="navigation" aria-label="Main navigation">
-  <a href="#home" class="nav-brand">ALHA</a>
+  <a href="#home" class="nav-brand">ALHA.AE</a>
   
   <div class="nav-center">
     <a href="#home" class="nav-link" data-section="home">HOME</a>
@@ -3248,7 +3242,7 @@
   
   <div style="display: flex; align-items: center; gap: 20px;">
     <button class="nav-cart" aria-label="Shopping cart">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
       </svg>
@@ -3419,7 +3413,6 @@
         </div>
         <div class="hero-cta-wrap">
           <a href="#menu-categories-section" class="hero-cta-primary">Explore Our Menu</a>
-          <a href="#menu-categories-section" class="hero-cta-secondary"><span>▶</span> View Signature Collection</a>
         </div>
       </div>
     </div>
@@ -3603,22 +3596,22 @@
         <div class="contact-form-wrap">
           <h2>Let's Create Together</h2>
           <p>Ready to craft your perfect dessert experience? Reach out and let's begin.</p>
-          <form class="contact-form">
+          <form class="contact-form" id="contact-form-simple" onsubmit="sendToWhatsApp(event,'simple')">
             <div class="form-group">
               <label>Your Name</label>
-              <input type="text" placeholder="Fatima Al-Rashidi" />
+              <input type="text" id="cf-name" placeholder="Fatima Al-Rashidi" required />
             </div>
             <div class="form-group">
               <label>Email Address</label>
-              <input type="email" placeholder="hello@example.com" />
+              <input type="email" id="cf-email" placeholder="hello@example.com" required />
             </div>
             <div class="form-group">
               <label>Phone Number</label>
-              <input type="tel" placeholder="+971 50 000 0000" />
+              <input type="tel" id="cf-phone" placeholder="+971 50 000 0000" required />
             </div>
             <div class="form-group">
               <label>Tell us about your event</label>
-              <textarea placeholder="Type of event, date, guest count, vision..."></textarea>
+              <textarea id="cf-message" placeholder="Type of event, date, guest count, vision..." required></textarea>
             </div>
             <button type="submit" class="submit-btn">Send Message</button>
           </form>
@@ -3630,16 +3623,16 @@
             <div class="info-value">Dubai, United Arab Emirates<br /></div>
           </div>
           <div class="info-item">
-            <div class="info-label">Email</div>
-            <div class="info-value"><a href="mailto:hello@alha.in">hello@alha.in</a></div>
+            <div class="info-label">Instagram</div>
+            <div class="info-value">
+              <a href="https://www.instagram.com/al7a_.0/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fab fa-instagram"></i> @al7a_.0
+              </a>
+            </div>
           </div>
           <div class="info-item">
             <div class="info-label">Phone</div>
             <div class="info-value"><a href="https://wa.me/971561561727">+971 56 156 1727</a></div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Hours</div>
-            <div class="info-value">Sunday – Thursday: 9am – 6pm<br />Friday: 10am – 2pm</div>
           </div>
         </div>
       </div>
@@ -3854,28 +3847,28 @@
         </div>
         <div class="contact-form-wrap reveal-text">
           <h3 class="contact-form-title">Send us a message</h3>
-          <p class="contact-form-sub">We'll get back to you within 24 hours</p>
+          <p class="contact-form-sub">We'll redirect you to WhatsApp with your message ready to send</p>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">First Name</label>
-              <input type="text" class="form-input" placeholder="Fatima">
+              <input type="text" id="vc-fname" class="form-input" placeholder="Fatima" required>
             </div>
             <div class="form-group">
               <label class="form-label">Last Name</label>
-              <input type="text" class="form-input" placeholder="Al-Rashidi">
+              <input type="text" id="vc-lname" class="form-input" placeholder="Al-Rashidi">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" placeholder="hello@example.com">
+            <input type="email" id="vc-email" class="form-input" placeholder="hello@example.com" required>
           </div>
           <div class="form-group">
             <label class="form-label">Phone Number</label>
-            <input type="tel" class="form-input" placeholder="+971 50 000 0000">
+            <input type="tel" id="vc-phone" class="form-input" placeholder="+971 50 000 0000" required>
           </div>
           <div class="form-group">
             <label class="form-label">Type of Event</label>
-            <select class="form-select form-input">
+            <select id="vc-event" class="form-select form-input">
               <option value="" disabled selected>Select event type</option>
               <option>Wedding</option>
               <option>Engagement</option>
@@ -3888,13 +3881,13 @@
           </div>
           <div class="form-group">
             <label class="form-label">Tell Us About Your Event</label>
-            <textarea class="form-textarea" placeholder="Date, guest count, vision, dietary requirements…"></textarea>
+            <textarea id="vc-message" class="form-textarea" placeholder="Date, guest count, vision, dietary requirements…" required></textarea>
           </div>
-          <button class="form-submit" onclick="document.getElementById('contact-success').style.display='block';this.style.display='none';">
+          <button class="form-submit" onclick="sendToWhatsApp(event,'full')">
             Send Message <span class="form-submit-icon">→</span>
           </button>
-          <div class="form-success" id="contact-success">
-            <p>✦ Thank you — we'll be in touch within 24 hours ✦</p>
+          <div class="form-success" id="contact-success" style="display:none;">
+            <p>✦ Redirecting you to WhatsApp… ✦</p>
           </div>
         </div>
       </div>
@@ -3912,14 +3905,12 @@
     </div>
   </div><!-- /#view-contact -->
 
-  
- 
   <footer role="contentinfo">
     <div class="footer-top">
       <div class="footer-brand-col">
-        <span class="footer-brand-name">ALHA</span>
+        <span class="footer-brand-name">ALHA.AE</span>
         <span class="footer-brand-sub">Luxury Dessert Catering</span>
-        <p class="footer-about">Crafting extraordinary dessert experiences across the United Arab Emirates since 2026. Every creation is a labour of love.</p>
+        <p class="footer-about">Crafting extraordinary dessert experiences across the United Arab Emirates. Every creation is a labour of love.</p>
       </div>
       <div class="footer-centre-col">
         <div class="footer-orn"><div class="footer-orn-line"></div><div class="footer-orn-gem"></div><div class="footer-orn-line"></div></div>
@@ -3928,17 +3919,20 @@
       </div>
       <div class="footer-right-col">
         <nav class="footer-links" aria-label="Footer navigation">
-          <a href="#">Home</a><a href="#menu-categories-section">Menu</a><a href="#">Events</a><a href="#">About Us</a><a href="#">Contact</a>
+          <a href="#home">Home</a>
+          <a href="#menu-categories-section">Menu</a>
+          <a href="#blog">Recipes</a>
+          <a href="#contact">Contact</a>
         </nav>
-        <p class="footer-contact">Dubai, United Arab Emirates<br>hello@alha.in<br>+971 56 156 1727</p>
+        <p class="footer-contact">Dubai, United Arab Emirates<br>@al7a_.0<br>+971 56 156 1727</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2026 ALHA. All rights reserved.</p>
+      <p class="footer-copy">© 2026 ALHA.AE. All rights reserved.</p>
       <p class="footer-craft">Handcrafted with Care ✦</p>
     </div>
   </footer>
- 
+
 </div><!-- /#main-site -->
  
 <!-- Supabase Services -->
@@ -4270,7 +4264,7 @@ setTimeout(()=>{
 (function() {
   if (!window.THREE) return;
   const canvas  = document.getElementById('hero-canvas');
-  const section = document.getElementById('hero-band');
+  const section = document.getElementById('hero-band') || document.getElementById('home');
   if (!canvas || !section) return;
  
   const W = () => section.offsetWidth;
@@ -4282,45 +4276,50 @@ setTimeout(()=>{
  
   const scene  = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(55, W()/H(), 0.1, 200);
-  camera.position.set(0, 0, 9);
+  camera.position.set(0, 0, 12);
  
   /* ── Ambient + point lights ── */
-  scene.add(new THREE.AmbientLight(0x3d0910, 0.8));
-  const pt1 = new THREE.PointLight(0xc9973a, 2.5, 20);
+  scene.add(new THREE.AmbientLight(0xd4a852, 1.2));
+  const pt1 = new THREE.PointLight(0xc9973a, 1.8, 20);
   pt1.position.set(3, 2, 5);
   scene.add(pt1);
-  const pt2 = new THREE.PointLight(0x6b1126, 1.8, 15);
+  const pt2 = new THREE.PointLight(0x8b5e20, 1.0, 15);
   pt2.position.set(-4, -2, 3);
   scene.add(pt2);
  
   /* ── Central torus (luxury ring) ── */
-  const torusGeo = new THREE.TorusGeometry(2.2, 0.055, 12, 160);
+  const torusGeo = new THREE.TorusGeometry(3.8, 0.055, 12, 160);
   const torusMat = new THREE.MeshStandardMaterial({
-    color: 0xc9973a, metalness: 0.95, roughness: 0.1,
-    emissive: 0x5a3000, emissiveIntensity: 0.3,
+    color: 0xb8832a, metalness: 0.95, roughness: 0.1,
+    emissive: 0x7a4800, emissiveIntensity: 0.2,
   });
   const torus = new THREE.Mesh(torusGeo, torusMat);
+  // Tilt to match the video — leaning left, slightly back
+  torus.rotation.x = Math.PI * 0.15;
+  torus.rotation.z = -Math.PI * 0.12;
   scene.add(torus);
  
-  /* ── Second thinner torus, tilted ── */
-  const torus2Geo = new THREE.TorusGeometry(3.0, 0.03, 8, 200);
+  /* ── Second thinner torus — wide oval, just taller than inner ring ── */
+  const torus2Geo = new THREE.TorusGeometry(4.2, 0.028, 8, 200);
   const torus2Mat = new THREE.MeshStandardMaterial({
-    color: 0xe8c06a, metalness: 0.9, roughness: 0.2,
-    emissive: 0x3a1800, emissiveIntensity: 0.2,
-    opacity: 0.55, transparent: true,
+    color: 0xc9973a, metalness: 0.9, roughness: 0.2,
+    emissive: 0x5a3500, emissiveIntensity: 0.15,
+    opacity: 0.7, transparent: true,
   });
   const torus2 = new THREE.Mesh(torus2Geo, torus2Mat);
-  torus2.rotation.x = Math.PI * 0.28;
-  torus2.rotation.z = Math.PI * 0.1;
+  torus2.rotation.x = Math.PI * 0.15;
+  torus2.rotation.z = -Math.PI * 0.12;
+  torus2.scale.set(1.6, 1.0, 1.0); // very wide, same height as base radius
   scene.add(torus2);
  
-  /* ── Third orbital ring (wireframe) ── */
-  const torus3Geo = new THREE.TorusGeometry(1.5, 0.018, 6, 120);
+  /* ── Third orbital ring — same axis ── */
+  const torus3Geo = new THREE.TorusGeometry(2.8, 0.018, 6, 120);
   const torus3Mat = new THREE.MeshBasicMaterial({
-    color: 0xfaf6ee, opacity: 0.07, transparent: true, wireframe: false,
+    color: 0xb8832a, opacity: 0.35, transparent: true,
   });
   const torus3 = new THREE.Mesh(torus3Geo, torus3Mat);
-  torus3.rotation.y = Math.PI * 0.5;
+  torus3.rotation.x = Math.PI * 0.15;
+  torus3.rotation.z = -Math.PI * 0.12;
   scene.add(torus3);
  
   /* ── Floating gold particles ── */
@@ -4342,8 +4341,8 @@ setTimeout(()=>{
   pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
   pGeo.setAttribute('size',     new THREE.BufferAttribute(pSizes, 1));
   const pMat = new THREE.PointsMaterial({
-    color: 0xd4a24f, size: 0.06, sizeAttenuation: true,
-    opacity: 0.5, transparent: true,
+    color: 0xb8832a, size: 0.04, sizeAttenuation: true,
+    opacity: 0.3, transparent: true,
   });
   const particles = new THREE.Points(pGeo, pMat);
   scene.add(particles);
@@ -4372,26 +4371,27 @@ setTimeout(()=>{
     targetX += (mouseX - targetX) * 0.04;
     targetY += (mouseY - targetY) * 0.04;
  
-    // Slow orbital rotation
-    torus.rotation.y  = t * 0.18;
-    torus.rotation.x  = Math.sin(t * 0.2) * 0.12 + targetY * 0.15;
-    torus.rotation.z  = targetX * 0.08;
- 
-    torus2.rotation.y = t * 0.09 + targetX * 0.1;
-    torus2.rotation.x = Math.PI * 0.28 + targetY * 0.08;
- 
-    torus3.rotation.x = t * 0.22;
-    torus3.rotation.z = t * 0.14;
- 
+    // Inner ring + small ring spin one way, outer oval spins opposite
+    torus.rotation.y  =  t * 0.15;
+    torus3.rotation.y =  t * 0.15;
+    torus2.rotation.y = -t * 0.12; // opposite direction, slightly slower
+
+    // Subtle mouse parallax tilt on top of base rotation
+    torus.rotation.x  = Math.PI * 0.15 + targetY * 0.06;
+    torus2.rotation.x = Math.PI * 0.15 + targetY * 0.06;
+    torus3.rotation.x = Math.PI * 0.15 + targetY * 0.06;
+
     particles.rotation.y = t * 0.04 + targetX * 0.05;
     particles.rotation.x = targetY * 0.04;
- 
-    // Breathing scale
+
+    // Breathing scale on inner ring only
     const breath = 1 + Math.sin(t * 0.6) * 0.018;
     torus.scale.setScalar(breath);
- 
+    // Outer oval keeps its fixed X/Y ratio — just pulse Z slightly
+    torus2.scale.set(1.6, 1.0, breath);
+
     // Light pulse
-    pt1.intensity = 2 + Math.sin(t * 1.1) * 0.6;
+    pt1.intensity = 1.6 + Math.sin(t * 1.1) * 0.4;
  
     renderer.render(scene, camera);
   })();
@@ -4552,6 +4552,47 @@ setTimeout(()=>{
   document.querySelectorAll('.reveal-img,.reveal-text,.reveal-quote')
     .forEach(el => revealObserver.observe(el));
 })();
+
+/* ════════════════════════════════════════════════════════
+   CONTACT → WHATSAPP
+════════════════════════════════════════════════════════ */
+function sendToWhatsApp(e, formType) {
+  e.preventDefault();
+
+  let name, email, phone, message, eventType = '';
+
+  if (formType === 'simple') {
+    name    = document.getElementById('cf-name')?.value.trim()    || '';
+    email   = document.getElementById('cf-email')?.value.trim()   || '';
+    phone   = document.getElementById('cf-phone')?.value.trim()   || '';
+    message = document.getElementById('cf-message')?.value.trim() || '';
+  } else {
+    const fname = document.getElementById('vc-fname')?.value.trim() || '';
+    const lname = document.getElementById('vc-lname')?.value.trim() || '';
+    name      = (fname + ' ' + lname).trim();
+    email     = document.getElementById('vc-email')?.value.trim()   || '';
+    phone     = document.getElementById('vc-phone')?.value.trim()   || '';
+    eventType = document.getElementById('vc-event')?.value         || '';
+    message   = document.getElementById('vc-message')?.value.trim() || '';
+  }
+
+  // Validate required fields
+  if (!name)    { alert('Please enter your name.');         return; }
+  if (!email)   { alert('Please enter your email address.'); return; }
+  if (!phone)   { alert('Please enter your phone number.');  return; }
+  if (!message) { alert('Please tell us about your event.'); return; }
+
+  // Build WhatsApp message
+  const details = eventType ? `Event Type: ${eventType}\nEvent Details: ${message}` : `Event Details: ${message}`;
+  const text = `🍰 New Inquiry\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n${details}`;
+
+  const encoded = encodeURIComponent(text);
+  window.open(`https://wa.me/971561561727?text=${encoded}`, '_blank');
+
+  // Show success state on the full form
+  const successEl = document.getElementById('contact-success');
+  if (successEl) successEl.style.display = 'block';
+}
 
 /* ════════════════════════════════════════════════════════
    9. GLOBAL CART LOGIC
@@ -4965,21 +5006,61 @@ console.log('Modal script loaded successfully - using safe delegation');
       <span class="cart-total-label">Total</span>
       <span class="cart-total-value" id="cart-total-value">AED 0</span>
     </div>
-    <button class="cart-checkout-btn" onclick="alert('Checkout functionality coming soon!')">
+    <button class="cart-checkout-btn" onclick="openIndexOrderReview()">
       Proceed to Checkout
     </button>
+  </div>
+</div>
+
+<!-- ──────────── ORDER REVIEW MODAL (index) ──────────── -->
+<div id="idx-order-review-overlay" style="
+  display:none; position:fixed; inset:0; z-index:600;
+  background:rgba(26,15,15,.75); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center;">
+  <div style="
+    background:var(--cream); width:min(540px,92vw); max-height:88vh;
+    overflow-y:auto; border:1px solid rgba(201,151,58,.25);
+    box-shadow:0 24px 64px rgba(0,0,0,.35); display:flex; flex-direction:column;">
+
+    <div style="padding:28px 32px 20px; border-bottom:1px solid rgba(201,151,58,.2); display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--primary); margin:0;">Your Order</h2>
+        <p style="font-size:12px; color:var(--text-lt); margin:4px 0 0; letter-spacing:1px;">Review and remove items before confirming</p>
+      </div>
+      <button onclick="closeIndexOrderReview()" style="background:none;border:none;font-size:24px;color:var(--text-lt);cursor:pointer;line-height:1;padding:4px 8px;">&times;</button>
+    </div>
+
+    <div id="idx-review-items" style="padding:20px 32px; flex:1; overflow-y:auto;"></div>
+
+    <div style="padding:16px 32px; border-top:1px solid rgba(201,151,58,.15); border-bottom:1px solid rgba(201,151,58,.15); background:rgba(201,151,58,.04);">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--text-lt);">Order Total</span>
+        <span id="idx-review-total" style="font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--primary); font-weight:300;"></span>
+      </div>
+      <p style="font-size:11px; color:var(--text-lt); margin-top:6px; font-style:italic;">* Event items are priced on request and confirmed by our team.</p>
+    </div>
+
+    <div style="padding:24px 32px; display:flex; gap:14px;">
+      <button onclick="closeIndexOrderReview()" style="flex:1;padding:14px;background:transparent;border:1px solid rgba(107,17,38,.25);color:var(--primary);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;">
+        Cancel
+      </button>
+      <button onclick="confirmIndexOrderWhatsApp()" style="flex:2;padding:14px;background:var(--primary);color:var(--cream);border:none;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500;display:flex;align-items:center;justify-content:center;gap:10px;">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Confirm &amp; Send via WhatsApp
+      </button>
+    </div>
   </div>
 </div>
 
 <script>
 // ══════════════════════════ CART SIDEBAR LOGIC ══════════════════════════
 (function() {
-  const cartOverlay = document.getElementById('cart-overlay');
-  const cartSidebar = document.getElementById('cart-sidebar');
-  const cartClose = document.getElementById('cart-close');
-  const navCart = document.querySelector('.nav-cart');
-  const cartItemsList = document.getElementById('cart-items-list');
-  const cartFooter = document.getElementById('cart-footer');
+  const cartOverlay    = document.getElementById('cart-overlay');
+  const cartSidebar    = document.getElementById('cart-sidebar');
+  const cartClose      = document.getElementById('cart-close');
+  const navCart        = document.querySelector('.nav-cart');
+  const cartItemsList  = document.getElementById('cart-items-list');
+  const cartFooter     = document.getElementById('cart-footer');
   const cartTotalValue = document.getElementById('cart-total-value');
   
   function openCart() {
@@ -4994,51 +5075,119 @@ console.log('Modal script loaded successfully - using safe delegation');
   }
   
   function renderCart() {
-    const cart = JSON.parse(localStorage.getItem('alha_cart')) || [];
-    
+    const cart = JSON.parse(localStorage.getItem('alha_cart') || '[]');
     if (cart.length === 0) {
       cartItemsList.innerHTML = '<p class="cart-empty">Your cart is empty</p>';
       cartFooter.style.display = 'none';
       return;
     }
-    
-    cartItemsList.innerHTML = cart.map((item, index) => `
+    cartItemsList.innerHTML = cart.map((item, i) => `
       <div class="cart-item">
-        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+        <img src="${item.image || ''}" alt="${item.name}" class="cart-item-img">
         <div class="cart-item-details">
           <div class="cart-item-name">${item.name}</div>
-          ${item.price ? `<div class="cart-item-price">AED ${item.price} each</div>` : '<div class="cart-item-price">Price on request</div>'}
-          <div class="cart-item-qty">
-            Qty: ${item.quantity}
-            ${item.subtotal ? ` • AED ${item.subtotal}` : ''}
-          </div>
+          ${item.price ? `<div class="cart-item-price">AED ${parseFloat(item.price).toFixed(2)} each</div>` : '<div class="cart-item-price">Price on request</div>'}
+          <div class="cart-item-qty">Qty: ${item.quantity}${item.subtotal ? ` • AED ${parseFloat(item.subtotal).toFixed(2)}` : ''}</div>
         </div>
-        <button class="cart-item-remove" onclick="removeFromCartIndex(${index})" aria-label="Remove item">×</button>
-      </div>
-    `).join('');
-    
-    const total = cart.reduce((sum, item) => sum + (item.subtotal || 0), 0);
+        <button class="cart-item-remove" onclick="removeFromCartIndex(${i})" aria-label="Remove">×</button>
+      </div>`).join('');
+    const total = cart.reduce((s, i) => s + (i.subtotal || 0), 0);
     cartTotalValue.textContent = total > 0 ? `AED ${total.toFixed(2)}` : 'Price on request';
     cartFooter.style.display = 'block';
   }
   
   window.removeFromCartIndex = function(index) {
-    const cart = JSON.parse(localStorage.getItem('alha_cart')) || [];
+    const cart = JSON.parse(localStorage.getItem('alha_cart') || '[]');
     cart.splice(index, 1);
     localStorage.setItem('alha_cart', JSON.stringify(cart));
-    
-    if (window.updateGlobalCartBadge) {
-      window.updateGlobalCartBadge();
-    }
-    
+    if (window.updateGlobalCartBadge) window.updateGlobalCartBadge();
     renderCart();
   };
-  
-  if (cartClose) cartClose.addEventListener('click', closeCart);
+
+  if (cartClose)   cartClose.addEventListener('click', closeCart);
   if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
-  if (navCart) navCart.addEventListener('click', openCart);
-  
+  if (navCart)     navCart.addEventListener('click', openCart);
   renderCart();
+})();
+
+// ══════════════════════════ ORDER REVIEW + WHATSAPP (index) ══════════════════════════
+(function() {
+  const overlay  = document.getElementById('idx-order-review-overlay');
+  const reviewEl = document.getElementById('idx-review-items');
+  const totalEl  = document.getElementById('idx-review-total');
+
+  function getCart() { return JSON.parse(localStorage.getItem('alha_cart') || '[]'); }
+
+  function renderReview() {
+    const cart = getCart();
+    if (!cart.length) { closeIndexOrderReview(); return; }
+    reviewEl.innerHTML = cart.map((item, i) => `
+      <div style="display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid rgba(201,151,58,.12);">
+        ${item.image
+          ? `<img src="${item.image}" alt="${item.name}" style="width:56px;height:56px;object-fit:cover;border:1px solid rgba(201,151,58,.2);">`
+          : `<div style="width:56px;height:56px;background:rgba(107,17,38,.06);display:flex;align-items:center;justify-content:center;font-size:22px;">🍮</div>`}
+        <div style="flex:1;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--primary);font-weight:400;">${item.name}</div>
+          <div style="font-size:12px;color:var(--text-lt);margin-top:3px;">
+            Qty: ${item.quantity}${item.price ? ` &nbsp;·&nbsp; AED ${parseFloat(item.price).toFixed(2)} each` : ' &nbsp;·&nbsp; Price on request'}
+          </div>
+          ${item.subtotal ? `<div style="font-size:13px;color:var(--primary);margin-top:2px;font-weight:500;">AED ${parseFloat(item.subtotal).toFixed(2)}</div>` : ''}
+        </div>
+        <button onclick="idxRemoveReviewItem(${i})" style="background:none;border:none;cursor:pointer;color:var(--text-lt);font-size:20px;line-height:1;padding:4px 8px;"
+          onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-lt)'">×</button>
+      </div>`).join('');
+    const total = cart.reduce((s, i) => s + (i.subtotal || 0), 0);
+    totalEl.textContent = total > 0 ? `AED ${total.toFixed(2)}` : 'Price on request';
+  }
+
+  window.openIndexOrderReview = function() {
+    const cart = getCart();
+    if (!cart.length) { alert('Your cart is empty.'); return; }
+    renderReview();
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeIndexOrderReview = function() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  window.idxRemoveReviewItem = function(index) {
+    const cart = getCart();
+    cart.splice(index, 1);
+    localStorage.setItem('alha_cart', JSON.stringify(cart));
+    if (window.updateGlobalCartBadge) window.updateGlobalCartBadge();
+    if (!cart.length) { closeIndexOrderReview(); return; }
+    renderReview();
+  };
+
+  window.confirmIndexOrderWhatsApp = function() {
+    const cart = getCart();
+    if (!cart.length) { alert('Your cart is empty.'); return; }
+    const lines = cart.map(item => {
+      const price = item.price
+        ? `AED ${parseFloat(item.price).toFixed(2)} each${item.subtotal ? ` → AED ${parseFloat(item.subtotal).toFixed(2)}` : ''}`
+        : 'Price on request';
+      return `• ${item.name} (x${item.quantity}) — ${price}`;
+    });
+    const total = cart.reduce((s, i) => s + (i.subtotal || 0), 0);
+    const totalLine = total > 0 ? `\nTotal: AED ${total.toFixed(2)}` : '\nTotal: Price on request (event items)';
+    const msg = `🛒 New Order from ALHA Website\n\n${lines.join('\n')}${totalLine}\n\nPlease confirm availability and pricing.`;
+    window.open(`https://wa.me/971561561727?text=${encodeURIComponent(msg)}`, '_blank');
+    closeIndexOrderReview();
+    // Clear cart fully
+    localStorage.setItem('alha_cart', JSON.stringify([]));
+    if (window.updateGlobalCartBadge) window.updateGlobalCartBadge();
+    const cartItemsList  = document.getElementById('cart-items-list');
+    const cartFooter     = document.getElementById('cart-footer');
+    const cartBadge      = document.getElementById('cart-badge');
+    if (cartItemsList) cartItemsList.innerHTML = '<p class="cart-empty">Your cart is empty</p>';
+    if (cartFooter)    cartFooter.style.display = 'none';
+    if (cartBadge)     { cartBadge.textContent = '0'; cartBadge.style.display = 'none'; }
+  };
+
+  if (overlay) overlay.addEventListener('click', e => { if (e.target === overlay) closeIndexOrderReview(); });
 })();
 </script>
 
