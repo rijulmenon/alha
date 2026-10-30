@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&family=Abril+Fatface&family=Playfair+Display:wght@900&display=swap" rel="stylesheet" />
   <!-- Tabler Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <!-- Three.js r128 from CDN -->
@@ -409,129 +409,74 @@
 
     /* ═══════════════════════════ LOADER ═══ */
     #loading-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: var(--primary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: opacity .8s cubic-bezier(.4,0,.2,1), visibility .8s;
-}
-
-#loading-screen::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 60% 70% at 50% 50%, transparent 40%, rgba(26,5,5,.55) 100%),
-    radial-gradient(ellipse 100% 30% at 50% 0%, rgba(107,17,38,.8) 0%, transparent 70%),
-    radial-gradient(ellipse 100% 30% at 50% 100%, rgba(26,5,5,.7) 0%, transparent 70%);
-}
+      position: fixed; inset: 0; z-index: 9999;
+      background: #F9F5EB;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      overflow: hidden;
+      transition: opacity .4s ease, visibility .4s;
+    }
     #loading-screen.fade-out { opacity:0; visibility:hidden; }
 
-    /* 3D wireframe sphere canvas in loader — hidden, kept for JS compat */
-    #loader-3d { display: none; }
-    .loader-corners { display:none; }
-
-    .loader-inner {
-      display:flex; flex-direction:column; align-items:center;
-      position: relative; z-index: 1;
-      animation: loaderReveal .6s .2s ease both;
+    .loader-wordmark {
+      font-family: 'Playfair Display', 'Abril Fatface', serif;
+      font-size: clamp(80px, 18vw, 180px);
+      font-weight: 900; color: #1a1a1a;
+      letter-spacing: -3px; line-height: 1;
+      animation: loaderReveal .5s .1s ease both;
     }
-    @keyframes loaderReveal { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes loaderReveal { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
-    /* Tag, ornaments, and diamond — hidden */
-    .loader-tag      { display:none; }
-    .loader-ornament { display:none; }
-
-    .wordmark-wrap { width:min(560px,82vw); }
-    .alha-svg { width:100%; height:auto; overflow:visible; }
-    .loader-tagline {
-      font-family:'Cormorant Garamond',serif; font-size:clamp(11px,1.5vw,15px);
-      font-style:italic; font-weight:300; color:rgba(232,192,106,.45);
-      letter-spacing:3px; margin-top:20px; margin-bottom:16px;
+    .loader-estd-row {
+      display: flex; align-items: center; gap: 0;
+      margin-top: 28px;
+      animation: loaderReveal .5s .25s ease both;
     }
-
-    /* ── Center-closing progress line ──
-       Sits inline, centred, directly below the wordmark.
-       Two fills close inward from each end of the compact track.   */
-    .loader-progress {
-      position: relative;
-      width: clamp(100px, 22vw, 140px);
-      height: 1px;
-      background: rgba(201,151,58,.18);
-      overflow: visible;
-      margin-top: 4px;
+    .loader-estd-label, .loader-estd-year {
+      font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400;
+      letter-spacing: 3px; text-transform: uppercase; color: #1a1a1a; white-space: nowrap;
     }
-    /* Subtle glow halo on the track */
-    .loader-progress::before {
-      content:'';
-      position: absolute; top: -1px; left: 0; right: 0; height: 3px;
-      background: rgba(201,151,58,.07);
-      filter: blur(2px);
+    .loader-estd-label { margin-right: 10px; }
+    .loader-estd-year  { margin-left: 10px; }
+    .loader-estd-line {
+      position: relative; width: clamp(120px, 22vw, 220px); height: 1px;
+      background: rgba(26,26,26,.15);
     }
-    /* Left fill — anchored left:0, grows right to 50% */
-    .loader-progress-fill-left {
+    .loader-estd-fill {
       position: absolute; top: 0; left: 0; height: 100%; width: 0%;
-      background: linear-gradient(90deg, rgba(201,151,58,.6), var(--gold-lt));
-      animation: closingLeft 2.4s cubic-bezier(.25,1,.5,1) forwards;
-      box-shadow: 0 0 4px rgba(232,192,106,.5);
+      background: #1a1a1a;
+      animation: estdFill 2.2s cubic-bezier(.25,1,.5,1) .2s forwards;
     }
-    /* Right fill — anchored right:0, grows left to 50% */
-    .loader-progress-fill-right {
-      position: absolute; top: 0; right: 0; height: 100%; width: 0%;
-      background: linear-gradient(270deg, rgba(201,151,58,.6), var(--gold-lt));
-      animation: closingRight 2.4s cubic-bezier(.25,1,.5,1) forwards;
-      box-shadow: 0 0 4px rgba(232,192,106,.5);
+    @keyframes estdFill { 0%{width:0%} 100%{width:100%} }
+    .loader-location {
+      font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 300;
+      letter-spacing: 3px; text-transform: uppercase; color: rgba(26,26,26,.5);
+      margin-top: 10px; text-align: center;
+      animation: loaderReveal .5s .35s ease both;
     }
-    @keyframes closingLeft  { 0%{width:0%} 100%{width:50%} }
-    @keyframes closingRight { 0%{width:0%} 100%{width:50%} }
 
-    /* ── Loader decorative background canvas ──
-       Full-bleed SVG behind the wordmark — gold glints, rings, dots. */
-    .loader-bg-canvas{
-    position:absolute;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-
-    background:
-      radial-gradient(circle at center,
-        rgba(140,0,30,.35) 0%,
-        rgba(107,17,38,.15) 40%,
-        rgba(107,17,38,0) 70%),
-
-      radial-gradient(ellipse 60% 70% at 50% 50%,
-        transparent 40%,
-        rgba(26,5,5,.55) 100%),
-
-      radial-gradient(ellipse 100% 30% at 50% 0%,
-        rgba(107,17,38,.8) 0%,
-        transparent 70%),
-
-      radial-gradient(ellipse 100% 30% at 50% 100%,
-        rgba(26,5,5,.7) 0%,
-        transparent 70%),
-
-      var(--primary);
-}
-    .loader-bg-canvas::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    opacity:.35;
-
-    background-image:
-      radial-gradient(circle,
-        rgba(201,151,58,.7) 1px,
-        transparent 1px);
-
-    background-size:62px 62px;
-}
+    /* ── 5-strip reveal overlay ── */
+    #strip-reveal {
+      position: fixed; inset: 0; z-index: 9998;
+      display: flex; pointer-events: none;
+      opacity: 0; visibility: hidden;
+    }
+    #strip-reveal.active { opacity: 1; visibility: visible; pointer-events: all; }
+    .strip {
+      flex: 1; height: 100%;
+      background: #6b1126;
+      transform: translateY(-100%);
+    }
+    /* Each strip slides DOWN then UP, staggered left to right */
+    #strip-reveal.active .strip:nth-child(1) { animation: stripFlip .7s cubic-bezier(.76,0,.24,1) 0.00s forwards; }
+    #strip-reveal.active .strip:nth-child(2) { animation: stripFlip .7s cubic-bezier(.76,0,.24,1) 0.08s forwards; }
+    #strip-reveal.active .strip:nth-child(3) { animation: stripFlip .7s cubic-bezier(.76,0,.24,1) 0.16s forwards; }
+    #strip-reveal.active .strip:nth-child(4) { animation: stripFlip .7s cubic-bezier(.76,0,.24,1) 0.24s forwards; }
+    #strip-reveal.active .strip:nth-child(5) { animation: stripFlip .7s cubic-bezier(.76,0,.24,1) 0.32s forwards; }
+    @keyframes stripFlip {
+      0%   { transform: translateY(-100%); }
+      45%  { transform: translateY(0%); }
+      100% { transform: translateY(100%); }
+    }
  
     /* ═══════════════════════════ PORTAL ═══ */
     #portal-overlay {
@@ -2895,6 +2840,11 @@
       border: 1px solid rgba(201,151,58,.2); transition: transform 0.4s;
       text-decoration: none;
     }
+    /* Single-card variant — wider, more cinematic */
+    .category-card--single {
+      max-width: 720px; flex: none; width: min(720px, 100%);
+      aspect-ratio: 16/7;
+    }
     .category-card:hover { transform: translateY(-5px); }
     .category-card::before {
       content:''; position:absolute; inset:0;
@@ -3259,134 +3209,57 @@
  
 <!-- ──────────── LOADING SCREEN ──────────── -->
 <div id="loading-screen" role="status" aria-label="Loading ALHA">
-  <div class="loader-corners"></div>
-
-  <!-- ── Decorative background canvas — gold on burgundy ── -->
-  <div class="loader-bg-canvas"> 
-    <defs>
-      <!-- Fine gold dot grid, 48px spacing -->
-      <pattern id="dot-grid" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
-        <circle cx="24" cy="24" r="0.7" fill="rgba(201,151,58,0.22)"/>
-      </pattern>
-
-      <!-- Reusable micro star-glint: four-point cross with tapered arms -->
-      <symbol id="glint" viewBox="-8 -8 16 16" overflow="visible">
-        <!-- Horizontal arm -->
-        <line x1="-7" y1="0" x2="7" y2="0"
-              stroke="rgba(232,192,106,0.30)" stroke-width="0.5"
-              stroke-linecap="round"/>
-        <!-- Vertical arm -->
-        <line x1="0" y1="-7" x2="0" y2="7"
-              stroke="rgba(232,192,106,0.30)" stroke-width="0.5"
-              stroke-linecap="round"/>
-        <!-- Diagonal light catch — shorter, finer -->
-        <line x1="-4" y1="-4" x2="4" y2="4"
-              stroke="rgba(232,192,106,0.14)" stroke-width="0.4"
-              stroke-linecap="round"/>
-        <line x1="4" y1="-4" x2="-4" y2="4"
-              stroke="rgba(232,192,106,0.14)" stroke-width="0.4"
-              stroke-linecap="round"/>
-        <!-- Centre accent dot -->
-        <circle cx="0" cy="0" r="0.9" fill="rgba(240,208,128,0.50)"/>
-      </symbol>
-
-      <!-- Reusable thin geometric ring with four tick marks -->
-      <symbol id="accent-ring" viewBox="-22 -22 44 44" overflow="visible">
-        <circle cx="0" cy="0" r="18"
-                fill="none" stroke="rgba(201,151,58,0.18)" stroke-width="0.6"/>
-        <!-- Four cardinal tick marks -->
-        <line x1="0"   y1="-18" x2="0"   y2="-22" stroke="rgba(201,151,58,0.22)" stroke-width="0.5"/>
-        <line x1="0"   y1="18"  x2="0"   y2="22"  stroke="rgba(201,151,58,0.22)" stroke-width="0.5"/>
-        <line x1="-18" y1="0"   x2="-22" y2="0"   stroke="rgba(201,151,58,0.22)" stroke-width="0.5"/>
-        <line x1="18"  y1="0"   x2="22"  y2="0"   stroke="rgba(201,151,58,0.22)" stroke-width="0.5"/>
-      </symbol>
-    </defs>
-
-    <!-- Full-field gold dot grid -->
-    <rect width="100%" height="100%" fill="url(#dot-grid)"/>
-
-    <!-- Corner hairline brackets — gold, 30px arms -->
-    <path d="M 36 62 L 36 36 L 62 36"
-          fill="none" stroke="rgba(201,151,58,0.22)" stroke-width="0.7"/>
-    <path d="M calc(100% - 62px) 36 L calc(100% - 36px) 36 L calc(100% - 36px) 62"
-          fill="none" stroke="rgba(201,151,58,0.22)" stroke-width="0.7"/>
-    <path d="M 36 calc(100% - 62px) L 36 calc(100% - 36px) L 62 calc(100% - 36px)"
-          fill="none" stroke="rgba(201,151,58,0.22)" stroke-width="0.7"/>
-    <path d="M calc(100% - 62px) calc(100% - 36px) L calc(100% - 36px) calc(100% - 36px) L calc(100% - 36px) calc(100% - 62px)"
-          fill="none" stroke="rgba(201,151,58,0.22)" stroke-width="0.7"/>
-
-    <!-- Thin horizontal rule across one-third from top -->
-    <line x1="0" y1="33%" x2="100%" y2="33%"
-          stroke="rgba(201,151,58,0.08)" stroke-width="0.5"/>
-    <!-- Thin horizontal rule across two-thirds -->
-    <line x1="0" y1="67%" x2="100%" y2="67%"
-          stroke="rgba(201,151,58,0.08)" stroke-width="0.5"/>
-    <!-- Vertical centreline -->
-    <line x1="50%" y1="0" x2="50%" y2="100%"
-          stroke="rgba(201,151,58,0.06)" stroke-width="0.5"/>
-
-    <!-- Accent rings — placed at compositional corners -->
-    <use href="#accent-ring" x="10%"  y="14%"/>
-    <use href="#accent-ring" x="90%"  y="14%"/>
-    <use href="#accent-ring" x="10%"  y="86%"/>
-    <use href="#accent-ring" x="90%"  y="86%"/>
-
-    <!-- Star glints scattered at asymmetric editorial positions -->
-    <use href="#glint" x="8%"   y="22%"/>
-    <use href="#glint" x="92%"  y="22%"/>
-    <use href="#glint" x="5%"   y="50%"/>
-    <use href="#glint" x="95%"  y="50%"/>
-    <use href="#glint" x="8%"   y="78%"/>
-    <use href="#glint" x="92%"  y="78%"/>
-    <use href="#glint" x="25%"  y="8%"/>
-    <use href="#glint" x="75%"  y="8%"/>
-    <use href="#glint" x="25%"  y="92%"/>
-    <use href="#glint" x="75%"  y="92%"/>
-    <!-- Lighter mid-edge accent dots -->
-    <circle cx="50%"  cy="5%"   r="1.2" fill="rgba(201,151,58,0.28)"/>
-    <circle cx="50%"  cy="95%"  r="1.2" fill="rgba(201,151,58,0.28)"/>
-    <circle cx="5%"   cy="50%"  r="1.2" fill="rgba(201,151,58,0.28)"/>
-    <circle cx="95%"  cy="50%"  r="1.2" fill="rgba(201,151,58,0.28)"/>
+  <p class="loader-wordmark">AL7A</p>
+  <div class="loader-estd-row">
+    <span class="loader-estd-label">ESTD</span>
+    <div class="loader-estd-line"><div class="loader-estd-fill"></div></div>
+    <span class="loader-estd-year">2026</span>
   </div>
-
-  <div class="loader-inner">
-    <p class="loader-tag">Est. 2020 &nbsp;·&nbsp; Kerala, India</p>
-    <canvas id="loader-3d"></canvas>
-    <div class="loader-ornament">
-      <div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line-r orn-line"></div>
-    </div>
-    <div class="wordmark-wrap">
-      <canvas id="measure-canvas" style="display:none;"></canvas>
-      <svg class="alha-svg" id="alha-svg" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" aria-label="ALHA">
-        <defs id="alha-defs"></defs><g id="alha-fills"></g><g id="alha-images"></g>
-      </svg>
-    </div>
-    <div class="loader-ornament" style="margin-top:14px;margin-bottom:0;">
-      <div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line-r orn-line"></div>
-    </div>
-    <p class="loader-tagline">Luxury Dessert Catering</p>
-
-    <!-- Center-closing progress line — inline, directly below wordmark -->
-    <div class="loader-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-      <div class="loader-progress-fill-left"></div>
-      <div class="loader-progress-fill-right"></div>
-    </div>
-  </div>
+  <p class="loader-location">ALHA.AE &nbsp;·&nbsp; DUBAI</p>
 </div>
- 
-<!-- ──────────── PORTAL ──────────── -->
-<div id="portal-overlay" aria-hidden="true">
-  <div class="portal-curtain-left"></div>
-  <div class="portal-curtain-right"></div>
-  <div class="portal-h" aria-hidden="true">
-    <svg class="portal-h-svg" id="portal-h-svg" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
-      <defs></defs>
-      <text class="portal-h-text" id="portal-h-letter" x="0" y="138"
-            font-family="'Abril Fatface', serif" font-size="148" letter-spacing="-2"
-            fill="#6b1126">7</text>
-    </svg>
-  </div>
+
+<!-- ──────────── 5 STRIP REVEAL (maroon, left→right) ──────────── -->
+<div id="strip-reveal">
+  <div class="strip"></div>
+  <div class="strip"></div>
+  <div class="strip"></div>
+  <div class="strip"></div>
+  <div class="strip"></div>
 </div>
+
+<!-- ──────────── PORTAL (stub) ──────────── -->
+<div id="portal-overlay" style="display:none;" aria-hidden="true"></div>
+
+<!-- ──────────── LOADER DISMISS ──────────── -->
+<script>
+(function() {
+  function dismiss() {
+    var ls = document.getElementById('loading-screen');
+    var sr = document.getElementById('strip-reveal');
+    var ms = document.getElementById('main-site');
+
+    if (!ls || ls.classList.contains('fade-out')) return;
+    ls.classList.add('fade-out');
+
+    // Show main site immediately so content is visible through the strips
+    if (ms) ms.classList.add('visible');
+
+    // Trigger 5-strip reveal
+    if (sr) {
+      sr.style.opacity = '1';
+      sr.style.visibility = 'visible';
+      sr.classList.add('active');
+      setTimeout(function() {
+        sr.style.opacity = '0';
+        sr.style.visibility = 'hidden';
+      }, 1200);
+    }
+  }
+
+  setTimeout(dismiss, 2600);
+  setTimeout(dismiss, 4500); // fallback
+})();
+</script>
  
 <!-- ──────────── MAIN SITE ──────────── -->
 <div id="main-site">
@@ -3504,13 +3377,9 @@
       </div>
     </div>
     <div class="menu-categories">
-      <a href="menu.html?category=events" class="category-card" data-category="events">
-        <img src="events1.jpeg" alt="Events Category">
-        <h3>Events (Bulk Orders)</h3>
-      </a>
-      <a href="menu.html?category=small" class="category-card" data-category="small">
-        <img src="events3.jpeg" alt="Small Quantity Category">
-        <h3>Single Orders</h3>
+      <a href="menu.html" class="category-card category-card--single">
+        <img src="events2.jpeg" alt="Our Menu">
+        <h3>Menu</h3>
       </a>
     </div>
   </section>
@@ -3669,7 +3538,7 @@
     <div class="page-hero">
       <div class="page-hero-bg-dots"></div>
       <div class="page-hero-content">
-        <p class="page-hero-eyebrow">Est. 2022 · Kerala, India</p>
+        <p class="page-hero-eyebrow">Est. 2026 · Dubai, United Arab Emirates</p>
         <h1 class="page-hero-title">The <em>ALHA</em> Story</h1>
         <p class="page-hero-sub">Crafted with love, presented with elegance</p>
         <div class="page-hero-rule">
@@ -3683,7 +3552,7 @@
       <div class="about-intro-text reveal-text">
         <p class="about-label">Our Beginning</p>
         <h2>Born from a <em>passion</em> for perfection</h2>
-        <p>ALHA began in a small home kitchen in Kerala, where every dessert was a labour of love made for family and friends. What started as handmade gifts evolved into something far greater — a luxury catering atelier that now graces weddings, corporate galas, and intimate celebrations across the UAE.</p>
+        <p>ALHA began in a small home kitchen in Dubai, where every dessert was a labour of love made for family and friends. What started as handmade gifts evolved into something far greater — a luxury catering atelier that now graces weddings, corporate galas, and intimate celebrations across the UAE.</p>
         <p>We believe a dessert isn't just something you eat. It's a memory you carry. Every piece we craft is designed to be tasted, remembered, and talked about long after the last bite.</p>
         <a href="#" class="section-cta" data-target="contact"><span>Work with us</span><span class="section-cta-arrow">→</span></a>
       </div>
@@ -3709,7 +3578,7 @@
         <div class="value-card reveal-text">
           <span class="value-icon">✦</span>
           <h3>Uncompromising Quality</h3>
-          <p>We source only premium-grade ingredients — single-origin chocolates, fresh Kerala spices, real saffron. No shortcuts, ever.</p>
+          <p>We source only premium-grade ingredients — single-origin chocolates. No shortcuts, ever.</p>
         </div>
         <div class="value-card reveal-text">
           <span class="value-icon">◇</span>
@@ -3729,7 +3598,7 @@
         <div class="value-card reveal-text">
           <span class="value-icon">✿</span>
           <h3>Cultural Fusion</h3>
-          <p>We blend the richness of Keralan sweetcraft with French pâtisserie and Levantine confectionery — creating flavours that feel both familiar and extraordinary.</p>
+          <p>We blend the richness of Dubai sweetcraft with French pâtisserie and Levantine confectionery — creating flavours that feel both familiar and extraordinary.</p>
         </div>
         <div class="value-card reveal-text">
           <span class="value-icon">◈</span>
@@ -3751,7 +3620,7 @@
           <div class="founder-avatar">A</div>
           <h3 class="founder-name">Alha Rashida</h3>
           <p class="founder-role">Founder & Head Pastry Chef</p>
-          <p class="founder-bio">Trained in Paris, rooted in Kerala. Alha brings classical French technique to every recipe she writes, infusing it with the warmth of home.</p>
+          <p class="founder-bio">Alha brings classical French technique to every recipe she writes, infusing it with the warmth of home.</p>
         </div>
         <div class="founder-card reveal-text">
           <div class="founder-avatar">K</div>
@@ -4164,97 +4033,11 @@
 })();
  
 /* ════════════════════════════════════════════════════════
-   3. WORDMARK + PORTAL (unchanged logic)
+   3. WORDMARK — no longer needed (CSS text replaces canvas wordmark)
 ════════════════════════════════════════════════════════ */
-document.fonts.load("148px 'Abril Fatface'").then(buildWordmark).catch(buildWordmark);
-function buildWordmark() {
-  const FONT="'Abril Fatface', serif",SIZE=148,BASELINE=138,KERN=-4,VIEW_H=160,PAD=0;
-  // AL7A — butter yellow on deep burgundy background
-  const letters=[
-    {ch:'A', fill:'#E8C97A'},
-    {ch:'L', fill:'#E8C97A'},
-    {ch:'7', fill:'#E8C97A'},
-    {ch:'A', fill:'#E8C97A'},
-  ];
-  const canvas=document.getElementById('measure-canvas');
-  const ctx=canvas.getContext('2d');
-  ctx.font=`${SIZE}px ${FONT}`;
-  const widths=letters.map(l=>ctx.measureText(l.ch).width);
-  const totalW=widths.reduce((s,w)=>s+w,0)+KERN*(letters.length-1)+PAD*2;
-  const svg=document.getElementById('alha-svg');
-  svg.setAttribute('viewBox',`0 0 ${Math.ceil(totalW)} ${VIEW_H}`);
-  const defs=document.getElementById('alha-defs');
-  const fills=document.getElementById('alha-fills');
-  // Clear any previous content
-  defs.innerHTML='';
-  fills.innerHTML='';
-  // alha-images layer is unused — clear it too
-  const images=document.getElementById('alha-images');
-  if(images) images.innerHTML='';
-  let cursor=PAD;
-  letters.forEach((l,i)=>{
-    const w=widths[i],id=`cp-${i}`;
-    const cp=document.createElementNS('http://www.w3.org/2000/svg','clipPath');
-    cp.setAttribute('id',id);
-    const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
-    txt.setAttribute('x',cursor);txt.setAttribute('y',BASELINE);
-    txt.setAttribute('font-family',FONT);txt.setAttribute('font-size',SIZE);
-    txt.textContent=l.ch;cp.appendChild(txt);defs.appendChild(cp);
-    // Solid colour fill only — no image layer
-    const gf=document.createElementNS('http://www.w3.org/2000/svg','g');
-    gf.setAttribute('clip-path',`url(#${id})`);
-    const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
-    rect.setAttribute('x',cursor);rect.setAttribute('y',0);rect.setAttribute('width',w+2);rect.setAttribute('height',VIEW_H);
-    rect.setAttribute('fill',l.fill);gf.appendChild(rect);fills.appendChild(gf);
-    cursor+=w+KERN;
-  });
-  // Portal 7 — solid fill, no pattern/image
-  const pH=document.getElementById('portal-h-letter');
-  if(pH){
-    pH.setAttribute('font-family',FONT);pH.setAttribute('font-size',SIZE);pH.setAttribute('y',BASELINE);
-    // Index 2 = '7'
-    const sevenW=widths[2];
-    const pSvg=document.getElementById('portal-h-svg');
-    pSvg.setAttribute('viewBox',`0 0 ${Math.ceil(sevenW)} ${VIEW_H}`);
-    pH.setAttribute('x',0);
-    pH.setAttribute('fill','#6b1126');
-    // Remove any pattern defs — we use solid fill only
-    const oldDefs=pSvg.querySelector('defs');
-    if(oldDefs) oldDefs.innerHTML='';
-  }
-}
- 
-const loadingScreen=document.getElementById('loading-screen');
-const portalOverlay=document.getElementById('portal-overlay');
-const mainSite=document.getElementById('main-site');
- 
-// Emergency fallback: Force hide loader after 3 seconds if still visible
-setTimeout(() => {
-  if (loadingScreen && !loadingScreen.classList.contains('fade-out')) {
-    console.warn('Emergency loader timeout triggered');
-    loadingScreen.classList.add('fade-out');
-    if (portalOverlay) {
-      portalOverlay.classList.add('active');
-      setTimeout(() => {
-        portalOverlay.classList.add('open');
-        mainSite.classList.add('visible');
-        setTimeout(() => { portalOverlay.style.display='none'; }, 800);
-      }, 80);
-    }
-  }
-}, 3000);
+// Loader now uses CSS text — no canvas drawing needed
 
-setTimeout(()=>{
-  loadingScreen.classList.add('fade-out');
-  setTimeout(()=>{
-    portalOverlay.classList.add('active');
-    setTimeout(()=>{
-      portalOverlay.classList.add('open');
-      mainSite.classList.add('visible');
-      setTimeout(()=>{portalOverlay.style.display='none';},800);
-    },80);
-  },40);
-},2600);
+// Loader dismissed by dedicated script above
  
 /* ════════════════════════════════════════════════════════
    4. HERO 3D SCENE (Three.js)
